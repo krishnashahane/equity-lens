@@ -1,6 +1,6 @@
 'use strict';
-const { send, allowMethods, readJson, clientIp, rateLimit, cleanString, handler, EMAIL_RE } = require('../lib/http');
-const { deliver } = require('../lib/notify');
+const { send, allowMethods, readJson, clientIp, rateLimit, cleanString, handler, EMAIL_RE } = require('./_lib/http');
+const { deliver } = require('./_lib/notify');
 
 module.exports = handler(async (req, res) => {
   if (!allowMethods(req, res, ['POST'])) return;

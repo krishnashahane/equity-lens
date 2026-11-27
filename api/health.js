@@ -1,5 +1,5 @@
 'use strict';
-const { send, allowMethods, handler } = require('../lib/http');
+const { send, allowMethods, handler } = require('./_lib/http');
 
 module.exports = handler(async (req, res) => {
   if (!allowMethods(req, res, ['GET', 'HEAD'])) return;

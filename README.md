@@ -25,7 +25,7 @@ An equity research and valuation workspace: company overview, financial statemen
 
 ## API
 
-Vercel serverless functions (Node 18+, no dependencies) in `api/`, with shared logic in `lib/`.
+Vercel serverless functions (Node 18+, no dependencies) in `api/`, with shared logic in `api/_lib/` (underscore-prefixed, so it is never exposed as a route or file).
 
 | Endpoint | Method | Purpose |
 | --- | --- | --- |
@@ -59,11 +59,11 @@ terms.html            terms and conditions
 privacy.html          privacy policy
 api/                  serverless endpoints
   health.js  valuation.js  research.js  contact.js  demo.js
-lib/
-  dcf.js              DCF model (same maths as the browser)
-  research.js         source retrieval for research answers
-  http.js             JSON, validation, body limits, rate limiting
-  notify.js           email delivery (Resend) or log fallback
+  _lib/               shared code (not exposed as routes)
+    dcf.js            DCF model (same maths as the browser)
+    research.js       source retrieval for research answers
+    http.js           JSON, validation, body limits, rate limiting
+    notify.js         email delivery (Resend) or log fallback
 scripts/dev-server.js local server: static files + /api, like Vercel
 tests/
   api.test.js         unit + HTTP tests for the API (node:test)

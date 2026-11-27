@@ -4,8 +4,8 @@ const assert = require('node:assert/strict');
 const http = require('node:http');
 const path = require('node:path');
 
-const { computeDCF, PRESETS, validateAssumptions, summarize } = require('../lib/dcf');
-const { answer } = require('../lib/research');
+const { computeDCF, PRESETS, validateAssumptions, summarize } = require('../api/_lib/dcf');
+const { answer } = require('../api/_lib/research');
 
 // ---- pure logic ----
 test('base-case DCF matches the published fair value', () => {

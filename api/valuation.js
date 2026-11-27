@@ -1,6 +1,6 @@
 'use strict';
-const { send, allowMethods, readJson, handler } = require('../lib/http');
-const { COMPANY, PRESETS, LIMITS, validateAssumptions, summarize } = require('../lib/dcf');
+const { send, allowMethods, readJson, handler } = require('./_lib/http');
+const { COMPANY, PRESETS, LIMITS, validateAssumptions, summarize } = require('./_lib/dcf');
 
 // GET  /api/valuation                 → company, presets, limits
 // GET  /api/valuation?scenario=bull   → valuation for a preset
