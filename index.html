@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EquityLens — Solvane Industrial (SOLV)</title>
+<title>EquityLens — Equity research &amp; valuation workspace</title>
+<meta name="description" content="Research companies, build DCF valuation scenarios, analyze financials and write source-cited investment reports in one workspace.">
+<meta name="theme-color" content="#17191f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%2317191f%27/%3E%3Ctext x=%2716%27 y=%2721.5%27 font-family=%27Arial,sans-serif%27 font-size=%2714%27 font-weight=%27700%27 fill=%27%23fff%27 text-anchor=%27middle%27%3EEL%3C/text%3E%3C/svg%3E">
+<script>try{if(localStorage.getItem('el-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
@@ -1041,9 +1045,8 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
 
 <style id="reference-ui-overrides">
 /* ============================================================
-   EQUITYLENS — Koyfin-inspired reference UI
-   Visual-only layer: preserves existing app states, controls,
-   valuation engine, AI research, watchlists and exports.
+   EQUITYLENS — UI layer
+   Visual-only layer on top of the base styles.
 ============================================================ */
 :root{
   --ref-black:#17191f;
@@ -1251,7 +1254,7 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
 #marketing-root .demo-card{border-radius:0;box-shadow:none;}
 #marketing-root .contact-form-card{border-radius:0;box-shadow:0 20px 50px rgba(20,22,28,.08);}
 
-/* App workspace: flatter, denser, Koyfin-like */
+/* App workspace */
 #shell{background:#f4f4f2;}
 #sidebar{background:#191b20;border-right:1px solid #2b2e35;}
 .side-brand{border-bottom:1px solid #2b2e35;}
@@ -1314,30 +1317,213 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
 </style>
 
 <style id="scroll-laptop-animation">
-/* Scroll-driven product/laptop showcase */
+/* Scroll-driven product showcase */
 .scroll-product-section{height:400vh;background:#fff;position:relative;}
-.scroll-product-sticky{height:100vh;position:sticky;top:0;overflow:hidden;display:grid;grid-template-columns:minmax(360px,46%) 1fr;align-items:center;padding:0 7vw;}
-.scroll-product-copy{position:relative;height:58vh;display:flex;align-items:center;}
+.scroll-product-sticky{height:100vh;position:sticky;top:0;overflow:hidden;display:grid;grid-template-columns:minmax(300px,36%) 1fr;gap:4vw;align-items:center;padding:0 5vw;max-width:1500px;margin:0 auto;box-sizing:border-box;}
+.scroll-product-copy{position:relative;height:58vh;}
 .scroll-kicker{position:absolute;top:4%;left:0;font-size:12px;font-weight:700;letter-spacing:.14em;color:#888;text-transform:uppercase;}
-.scroll-slide{position:absolute;left:0;top:50%;transform:translateY(-50%) translateY(35px);width:min(500px,90%);opacity:0;transition:opacity .65s ease,transform .8s cubic-bezier(.2,.8,.2,1);pointer-events:none;}
-.scroll-slide.active{opacity:1;transform:translateY(-50%) translateY(0);}
-.scroll-slide h2{font-size:clamp(42px,5vw,76px);line-height:.98;letter-spacing:-.055em;margin:0 0 24px;color:#15171b;font-weight:650;}
-.scroll-slide p{font-size:19px;line-height:1.55;color:#666;max-width:470px;margin:0;}
-.scroll-laptop-wrap{height:600px;position:relative;display:flex;align-items:center;justify-content:flex-start;transform:translateX(9vw);transition:transform .9s cubic-bezier(.2,.8,.2,1);}
-.scroll-laptop{width:min(900px,68vw);aspect-ratio:1.42/1;position:relative;transform:perspective(1400px) rotateY(-4deg);filter:drop-shadow(0 28px 30px rgba(0,0,0,.12));}
-.scroll-laptop-screen{position:absolute;left:0;top:0;width:100%;height:77%;border:10px solid #16181d;border-bottom-width:14px;border-radius:18px 18px 5px 5px;background:#0f1115;overflow:hidden;box-shadow:inset 0 0 0 1px #444;}
-.scroll-camera{position:absolute;z-index:20;top:-1px;left:50%;width:100px;height:18px;transform:translateX(-50%);background:#111;border-radius:0 0 12px 12px;}
-.scroll-laptop-base{position:absolute;left:-6%;top:75%;width:112%;height:10%;background:linear-gradient(#74777d,#4b4e54);clip-path:polygon(6% 0,94% 0,100% 70%,97% 100%,3% 100%,0 70%);border-radius:0 0 18px 18px;box-shadow:0 4px 5px rgba(0,0,0,.2);}
-.scroll-laptop-hinge{position:absolute;left:15%;top:73.5%;width:70%;height:5px;background:#303238;border-radius:50%;z-index:3;}
-.scroll-trackpad{position:absolute;left:39%;top:12%;width:22%;height:55%;background:#62656b;border-radius:2px;opacity:.65;}
-.scroll-laptop-shadow{position:absolute;width:75%;height:35px;bottom:4%;left:9%;background:rgba(0,0,0,.15);filter:blur(22px);border-radius:50%;transition:transform .8s ease,opacity .8s ease;}
-.scroll-app{position:absolute;inset:0;display:grid;grid-template-columns:20% 80%;background:#f5f6f8;color:#20242a;opacity:0;transform:translateX(40px) scale(.985);transition:opacity .55s ease,transform .65s cubic-bezier(.2,.8,.2,1);padding-top:12px;}
+.scroll-slide{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) translateY(28px);opacity:0;transition:opacity .55s ease,transform .7s cubic-bezier(.2,.8,.2,1);pointer-events:none;}
+.scroll-slide.active{opacity:1;transform:translateY(-50%);}
+.scroll-slide h2{font-size:clamp(40px,4.4vw,68px);line-height:1;letter-spacing:-.045em;margin:0 0 22px;color:#15171b;font-weight:600;}
+.scroll-slide p{font-size:18px;line-height:1.55;color:#62656d;max-width:440px;margin:0;}
+.scroll-laptop-wrap{display:flex;justify-content:center;align-items:center;min-width:0;}
+.scroll-laptop{width:100%;max-width:880px;position:relative;}
+.scroll-laptop-screen{position:relative;background:#0c0d10;border-radius:16px 16px 0 0;padding:2% 2% 2.6%;box-shadow:inset 0 0 0 1px #2b2d33,0 30px 60px -30px rgba(15,17,22,.35);}
+.scroll-camera{position:absolute;top:.75%;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#24262b;box-shadow:inset 0 0 0 1px #34363c;}
+.scroll-display{position:relative;aspect-ratio:16/10;overflow:hidden;background:#f4f4f2;border-radius:3px;container-type:inline-size;}
+.scroll-laptop-base{position:relative;width:112%;margin-left:-6%;height:15px;background:linear-gradient(#e4e5e7,#b7b9bd 55%,#8f9196);border-radius:2px 2px 14px 14px/2px 2px 10px 10px;}
+.scroll-laptop-base::before{content:'';position:absolute;left:50%;top:0;width:16%;height:6px;margin-left:-8%;background:linear-gradient(#a9abaf,#c4c6c9);border-radius:0 0 8px 8px;}
+.scroll-laptop-shadow{position:absolute;left:3%;right:3%;bottom:-22px;height:26px;background:rgba(15,17,22,.22);filter:blur(18px);border-radius:50%;z-index:-1;}
+
+.scroll-app{position:absolute;inset:0;display:grid;grid-template-columns:17% 1fr;background:#f4f4f2;color:#17191f;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .55s cubic-bezier(.2,.8,.2,1);font-size:11px;font-size:1.38cqw;line-height:1.35;font-variant-numeric:normal;text-align:left;letter-spacing:0;}
+.sa-table td,.sa-tile b,.sa-px b,.sa-fv b,.sa-fvhero b,.sa-bar b,.sa-as b{font-variant-numeric:tabular-nums;}
 .scroll-app.active{opacity:1;transform:none;}
-.sl-sidebar{background:#171a20;color:#aeb4bf;padding:17px 10px;display:flex;flex-direction:column;gap:12px;font-size:9px;}
-.sl-sidebar b{font-size:11px;color:#fff;margin-bottom:12px;}.sl-sidebar .on{color:#fff;background:#2d3440;padding:5px;border-radius:3px;}
-.sl-main{padding:16px 18px;overflow:hidden;}.sl-top{display:flex;justify-content:space-between;font-size:11px;border-bottom:1px solid #d8dbe0;padding-bottom:9px;margin-bottom:14px;}.sl-grid{display:grid;grid-template-columns:1.4fr .7fr;gap:9px;}.sl-card{background:#fff;border:1px solid #dfe2e7;border-radius:4px;padding:10px;min-height:100px;}.sl-card.wide{min-height:150px;}.sl-card i{display:block;height:6px;background:#d9dde4;border-radius:2px;margin-bottom:8px;width:70%;}.sl-card i:nth-child(2){width:48%;}.sl-card i:nth-child(3){width:62%;}.sl-chart{height:68px;margin-top:15px;background:linear-gradient(170deg,transparent 46%,#82aeea 47%,#82aeea 49%,transparent 50%),repeating-linear-gradient(0deg,#fff,#fff 16px,#eef1f5 17px);}.table{grid-column:1/-1;min-height:100px;}.financial-lines div{height:27px;border-bottom:1px solid #e1e4e8;background:linear-gradient(90deg,#cbd1d8 0 12%,transparent 12% 17%,#e4e7eb 17% 40%,transparent 40% 44%,#d4d9df 44% 61%,transparent 61% 66%,#e1e4e9 66% 85%,transparent 85%);}.valuation-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;}.big-number{font-size:28px;font-weight:700;margin:20px 0 5px;}.sl-bars{margin-top:20px;display:flex;gap:7px;align-items:end;height:55px;}.sl-bars i{display:block;width:20%;background:#83a9df;border-radius:3px 3px 0 0;height:50%;}.sl-bars i:nth-child(2){height:72%;}.sl-bars i:nth-child(3){height:92%;}.curve{height:160px;background:linear-gradient(165deg,transparent 50%,#6d9ee1 51%,#6d9ee1 53%,transparent 54%),linear-gradient(175deg,transparent 60%,#d6dce5 61%,#d6dce5 63%,transparent 64%);}.ai-box{background:#fff;border:1px solid #dfe2e7;padding:18px;border-radius:5px;margin-top:10px;}.ai-line{height:9px;background:#d9dee5;border-radius:3px;margin-bottom:11px;width:82%;}.ai-line.long{width:94%;}.ai-line.medium{width:65%;}.ai-source{margin-top:24px;color:#3b8a62;font-size:9px;background:#eef8f2;padding:8px;border-radius:4px;}
-@media(max-width:900px){.scroll-product-section{height:320vh}.scroll-product-sticky{grid-template-columns:1fr;padding:0 24px;align-items:start;padding-top:14vh}.scroll-product-copy{height:38vh}.scroll-slide{top:20%;transform:translateY(25px);}.scroll-slide.active{transform:translateY(0)}.scroll-slide h2{font-size:44px}.scroll-slide p{font-size:16px}.scroll-laptop-wrap{height:390px;transform:none;justify-content:center;margin-top:5vh}.scroll-laptop{width:94vw}.scroll-laptop-screen{border-width:6px}.sl-sidebar{font-size:7px}.sl-main{padding:9px}.sl-top{font-size:8px}}
-@media(prefers-reduced-motion:reduce){.scroll-slide,.scroll-app,.scroll-laptop-wrap{transition:none!important}}
+.scroll-app .pos{color:#17845f;}
+.scroll-app .bear{background:#c14b43;} .scroll-app .base{background:#3b5fd9;} .scroll-app .bull{background:#1c9a80;}
+.sa-side{background:#191b20;color:#aeb2bb;padding:1.3em .8em;display:flex;flex-direction:column;gap:.2em;}
+.sa-brand{display:flex;align-items:center;gap:.5em;color:#fff;font-weight:700;font-size:1.1em;margin:0 0 .8em .3em;}
+.sa-mark{background:#fff;color:#17191f;font-size:.68em;font-weight:800;padding:.3em .35em;border-radius:3px;line-height:1;}
+.sa-label{font-size:.7em;letter-spacing:.09em;text-transform:uppercase;color:#70757f;margin:.9em 0 .3em .55em;}
+.sa-item{padding:.5em .6em;border-radius:2px;display:flex;justify-content:space-between;align-items:center;white-space:nowrap;}
+.sa-item.on{background:#263f84;color:#fff;}
+.sa-item em{font-style:normal;background:#3b5fd9;color:#fff;border-radius:9px;padding:0 .5em;font-size:.8em;line-height:1.6;}
+.sa-main{display:flex;flex-direction:column;min-width:0;overflow:hidden;}
+.sa-top{background:#191b20;display:flex;align-items:center;gap:1em;padding:.7em 1.3em;color:#9da2ac;border-bottom:1px solid #2b2e35;white-space:nowrap;}
+.sa-search{flex:0 1 44%;background:#24272d;border:1px solid #363a42;border-radius:2px;padding:.35em .7em;color:#8e939d;overflow:hidden;}
+.sa-asof{margin-left:auto;font-size:.9em;}
+.sa-av{width:2.1em;height:2.1em;border-radius:50%;background:#24272d;border:1px solid #3b3e46;color:#c8cbd1;display:flex;align-items:center;justify-content:center;font-size:.8em;font-weight:700;flex:0 0 auto;}
+.sa-body{padding:1.1em 1.4em;display:flex;flex-direction:column;gap:.85em;min-height:0;}
+.sa-co{display:flex;justify-content:space-between;align-items:flex-start;}
+.sa-co b{font-size:1.35em;letter-spacing:-.01em;}
+.sa-tk{border:1px solid #d8d9d7;background:#fff;padding:.05em .4em;font-size:.85em;color:#5b6472;margin-left:.35em;vertical-align:.15em;}
+.sa-meta{color:#6b7180;font-size:.85em;margin-top:.2em;}
+.sa-px{text-align:right;display:flex;flex-direction:column;gap:.1em;}
+.sa-px b{font-size:1.35em;}
+.sa-px span{font-size:.9em;font-weight:600;}
+.sa-tabs{display:flex;gap:1.7em;border-bottom:1px solid #d8d9d7;color:#6b7180;}
+.sa-tabs span{padding-bottom:.55em;}
+.sa-tabs .on{color:#17191f;font-weight:600;box-shadow:inset 0 -2px #17191f;}
+.sa-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:.8em;}
+.sa-tile,.sa-panel{background:#fff;border:1px solid #e3e3e0;border-radius:2px;}
+.sa-tile{padding:.75em .9em;display:flex;flex-direction:column;gap:.25em;}
+.sa-tile small{color:#6b7180;font-size:.85em;}
+.sa-tile b{font-size:1.45em;letter-spacing:-.01em;}
+.sa-tile span{font-size:.85em;color:#6b7180;}
+.sa-tile span.pos{color:#17845f;}
+.sa-row{display:grid;grid-template-columns:1.45fr 1fr;gap:.8em;}
+.sa-ph{display:flex;justify-content:space-between;align-items:center;gap:1em;padding:.65em .9em;border-bottom:1px solid #ecece9;font-weight:600;white-space:nowrap;}
+.sa-sub{font-weight:400;color:#8890a0;font-size:.88em;}
+.sa-rng{display:flex;gap:.15em;font-weight:500;}
+.sa-rng i{font-style:normal;color:#8890a0;padding:.1em .45em;font-size:.85em;}
+.sa-rng i.on{background:#eef0f3;color:#17191f;}
+.sa-chart{display:block;width:100%;height:11.5em;}
+.sa-chartwrap{padding:.7em .9em;}
+.sa-fv{display:flex;justify-content:space-between;align-items:center;padding:.8em .9em 0;}
+.sa-fv small{display:block;color:#6b7180;font-size:.85em;}
+.sa-fv b{font-size:2em;letter-spacing:-.02em;}
+.sa-badge{font-weight:700;padding:.2em .65em;border-radius:999px;background:rgba(23,132,95,.1);white-space:nowrap;}
+.sa-scale{position:relative;margin:2.2em .9em 0;height:1em;}
+.sa-scale::before{content:'';position:absolute;left:0;right:0;top:50%;height:3px;margin-top:-1.5px;background:linear-gradient(90deg,#c14b43,#a8721c,#1c9a80);opacity:.5;border-radius:2px;}
+.sa-scale i{position:absolute;top:50%;width:.85em;height:.85em;margin:-.425em 0 0 -.425em;border-radius:50%;border:2px solid #fff;box-sizing:border-box;}
+.sa-scale i.mkt{width:2px;height:2em;margin:-1em 0 0 -1px;border:0;border-radius:0;background:#17191f;}
+.sa-scale b{position:absolute;top:-1.9em;transform:translateX(-50%);font-size:.82em;white-space:nowrap;}
+.sa-scale-lbl{position:relative;height:1.3em;margin:.4em .9em 0;color:#6b7180;font-size:.82em;}
+.sa-scale-lbl span{position:absolute;transform:translateX(-50%);white-space:nowrap;}
+.sa-btn{margin:.9em;background:#1e57d8;color:#fff;text-align:center;padding:.55em;border-radius:2px;font-weight:600;}
+.sa-seg{display:flex;align-self:flex-start;border:1px solid #d8d9d7;background:#fff;border-radius:2px;}
+.sa-seg i{font-style:normal;padding:.35em .85em;color:#6b7180;}
+.sa-seg i.on{background:#17191f;color:#fff;}
+.sa-table{width:100%;border-collapse:collapse;}
+.sa-table th,.sa-table td{padding:.58em .9em;text-align:right;border-bottom:1px solid #ecece9;white-space:nowrap;}
+.sa-table th{color:#8890a0;font-weight:600;font-size:.88em;}
+.sa-table th:first-child,.sa-table td:first-child{text-align:left;}
+.sa-table td:first-child{color:#5b6472;}
+.sa-table tr.strong td{font-weight:700;color:#17191f;}
+.sa-table tr.muted td{color:#8890a0;font-size:.92em;}
+.sa-table tr:last-child td{border-bottom:0;}
+.sa-table td:last-child,.sa-table th:last-child{background:#f7f8fa;}
+.sa-val{display:grid;grid-template-columns:.85fr 1.3fr;gap:.8em;align-items:start;}
+.sa-col{display:flex;flex-direction:column;gap:.8em;}
+.sa-scn{display:grid;grid-template-columns:repeat(3,1fr);gap:.3em;padding:.75em .9em .2em;}
+.sa-scn i{font-style:normal;text-align:center;border:1px solid #e3e3e0;padding:.35em;border-radius:2px;color:#5b6472;}
+.sa-scn i.on{background:#1e57d8;border-color:#1e57d8;color:#fff;}
+.sa-as{padding:.6em .9em 0;display:grid;grid-template-columns:1fr auto;row-gap:.45em;}
+.sa-as:last-child{padding-bottom:1em;}
+.sa-as span{color:#5b6472;}
+.sa-as b{font-weight:600;}
+.sa-sl{grid-column:1/-1;height:3px;background:#e3e3e0;border-radius:2px;position:relative;}
+.sa-sl i{position:absolute;left:0;top:0;bottom:0;background:#1e57d8;border-radius:2px;}
+.sa-sl i::after{content:'';position:absolute;right:-.45em;top:50%;width:.9em;height:.9em;margin-top:-.45em;border-radius:50%;background:#fff;border:2px solid #1e57d8;box-sizing:border-box;}
+.sa-fvhero{display:flex;align-items:center;gap:1.3em;padding:.9em;}
+.sa-fvhero small{display:block;color:#6b7180;font-size:.85em;margin-bottom:.15em;}
+.sa-fvhero b{font-size:1.9em;letter-spacing:-.02em;}
+.sa-vs{color:#8890a0;}
+.sa-fvhero .sa-badge{margin-left:auto;}
+.sa-bars{padding:.8em .9em .4em;display:flex;flex-direction:column;gap:.75em;}
+.sa-bar{display:grid;grid-template-columns:3.2em 1fr 3.4em;align-items:center;gap:.7em;}
+.sa-bar span{color:#5b6472;}
+.sa-bar b{text-align:right;}
+.sa-bar div{height:1.15em;background:#f2f2f0;position:relative;}
+.sa-bar div i{position:absolute;left:0;top:0;bottom:0;opacity:.85;}
+.sa-note{padding:0 .9em .9em;color:#8890a0;font-size:.85em;}
+.sa-ai{display:grid;grid-template-columns:1.25fr 1fr;gap:.8em;align-items:start;}
+.sa-chat{display:flex;flex-direction:column;}
+.sa-q{align-self:flex-end;background:#17191f;color:#fff;padding:.5em .8em;border-radius:2px;margin:.9em .9em 0;}
+.sa-a{padding:.2em .9em .4em;}
+.sa-a h6{margin:.8em 0 .35em;font-size:.76em;letter-spacing:.07em;text-transform:uppercase;color:#8890a0;}
+.sa-a p{margin:0 0 .45em;color:#33373f;}
+.sa-a em{font-style:normal;font-size:.8em;font-weight:600;color:#17845f;background:rgba(23,132,95,.1);padding:.1em .4em;margin-right:.35em;}
+.sa-a sup{font-size:.72em;color:#1e57d8;font-weight:700;border:1px solid #c9d6f7;padding:0 .3em;margin-left:.25em;vertical-align:.35em;line-height:1;}
+.sa-input{margin:.4em .9em .9em;border:1px solid #e3e3e0;padding:.45em .6em;color:#8890a0;display:flex;justify-content:space-between;align-items:center;}
+.sa-input span{background:#1e57d8;color:#fff;padding:.2em .75em;border-radius:2px;}
+.sa-doc p{margin:.85em .9em;color:#33373f;line-height:1.6;}
+.sa-doc mark{background:rgba(30,87,216,.1);color:inherit;box-shadow:inset 2px 0 #1e57d8;padding:.05em .25em;}
+.sa-doc h6{margin:.9em .9em 0;font-size:.76em;letter-spacing:.07em;text-transform:uppercase;color:#8890a0;}
+
+@media(max-width:900px){
+  .scroll-product-section{height:340vh;}
+  .scroll-product-sticky{grid-template-columns:1fr;gap:0;padding:12vh 20px 0;align-items:start;}
+  .scroll-product-copy{height:36vh;}
+  .scroll-kicker{top:0;}
+  .scroll-slide h2{font-size:40px;}
+  .scroll-slide p{font-size:16px;}
+  .scroll-laptop-screen{border-radius:10px 10px 0 0;}
+  .scroll-laptop-base{height:9px;}
+}
+@media(prefers-reduced-motion:reduce){.scroll-slide,.scroll-app{transition:none!important}}
+
+/* ---------- Site fixes ---------- */
+#marketing-root{overflow-x:clip;}
+#marketing-root, #authpage{font-variant-numeric:normal;}
+#marketing-root .hero{min-height:0;padding:112px 0 104px;}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+@media(max-width:900px){#marketing-root .hero{padding:72px 0 64px;}}
+@media(max-width:880px){
+  #marketing-root .nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;padding:18px 28px;border-bottom:1px solid var(--ref-line);gap:16px;z-index:40;}
+}
+#marketing-root .contact-hero .contact-bullet .t{color:#17191f;}
+#marketing-root .contact-hero .contact-bullet .s{color:#66696f;}
+#marketing-root .contact-hero .contact-bullet .ic{background:#f1f2f1;color:#17191f;}
+#marketing-root .contact-hero .eyebrow-pill{display:inline-block;}
+#marketing-root .footer-links a{cursor:pointer;}
+#marketing-root .footer-links a:hover{color:#17191f;text-decoration:underline;}
+#marketing-root .nav-links a.active{color:#17191f;font-weight:600;}
+
+/* Top bar text on the dark bar */
+#topbar .account-name{color:#fff;}
+#topbar .account-role{color:#9da2ac;}
+#topbar .account-chevron{color:#9da2ac;}
+#topbar .account-cluster:hover{background:#24272d;}
+#topbar .bell-btn{color:#c7cad0;}
+#topbar .bell-btn:hover{background:#24272d;color:#fff;}
+.theme-btn .i-sun{display:none;}
+html[data-theme="dark"] .theme-btn .i-sun{display:block;}
+html[data-theme="dark"] .theme-btn .i-moon{display:none;}
+
+/* Dark theme — app workspace */
+html[data-theme="dark"]{color-scheme:dark;}
+html[data-theme="dark"] #shell,
+html[data-theme="dark"] #modal-root,
+html[data-theme="dark"] #cmdk-overlay{
+  --bg:#111317; --bg-raised:#171a1f; --panel:#181b20; --panel-alt:#20242a; --panel-hover:#272b32;
+  --border:#2a2e35; --border-strong:#3a3f48;
+  --text:#e6e8ec; --text-muted:#a7adb8; --text-faint:#7d838f;
+  --blue:#6d8cff; --blue-dim:#3b5fd9; --blue-soft:rgba(109,140,255,.14);
+  --teal:#3fc29f; --teal-soft:rgba(63,194,159,.14);
+  --red:#e57b72; --red-soft:rgba(229,123,114,.15);
+  --amber:#dcaa4e; --amber-soft:rgba(220,170,78,.15);
+  --bg-soft:#20242a;
+}
+html[data-theme="dark"] #shell,
+html[data-theme="dark"] #content{background:#111317;color:var(--text);}
+html[data-theme="dark"] .panel-head,
+html[data-theme="dark"] .chart-toolbar{background:var(--panel);}
+html[data-theme="dark"] .tabbar{border-bottom-color:var(--border);}
+html[data-theme="dark"] .tabbtn.active{border-bottom-color:var(--text);}
+html[data-theme="dark"] .btn-primary{background:#2f62e0;border-color:#2f62e0;color:#fff;}
+html[data-theme="dark"] .heat-cell.current{outline-color:#fff;}
+html[data-theme="dark"] .app-footer{background:#111317;border-color:var(--border);}
+html[data-theme="dark"] #shell input,
+html[data-theme="dark"] #shell select,
+html[data-theme="dark"] #shell textarea{color:var(--text);}
+html[data-theme="dark"] #topbar input,
+html[data-theme="dark"] #topbar select{color:#c7cad0;}
+/* polish */
+#marketing-root .stat-num{font-variant-numeric:normal;}
+#authpage .auth-visual .eyebrow-pill{display:inline-flex;align-items:center;gap:6px;width:auto;align-self:flex-start;max-width:max-content;}
+.auth-check span{display:inline;}
+.auth-check span .auth-link{display:inline;}
+#marketing-root footer .tag{margin-left:0;margin-right:0;text-align:left;}
+#marketing-root .nav-mobile-only{display:none;}
+#marketing-root .nav-right > a[data-arg="signin"]{white-space:nowrap;}
+@media(max-width:520px){
+  #marketing-root .wrap{padding-left:20px;padding-right:20px;}
+  #marketing-root .nav-right > a[data-arg="signin"]{display:none;}
+  #marketing-root .nav-links.open .nav-mobile-only{display:block;}
+  #marketing-root .nav-cta{padding:9px 14px;}
+}
+#content .flex.between.items-center{flex-wrap:wrap;gap:12px;}
+html[data-theme="dark"] .scenario-tab.active{background:#2f62e0;border-color:#2f62e0;color:#fff;}
 </style>
 </head>
 <body>
@@ -1360,19 +1546,15 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
       EquityLens
     </div>
     <div class="nav-links" id="nav-links">
-      <a data-action="goto" data-arg="mkt-home">Product</a>
-      <a data-action="goto" data-arg="mkt-platform">For Analysts</a>
-      <a data-action="goto" data-arg="mkt-pricing">Pricing</a>
-      <a data-action="goto" data-arg="mkt-contact">Company</a>
+      <a href="/" data-action="goto" data-arg="mkt-home">Product</a>
+      <a href="#platform" data-action="goto" data-arg="mkt-platform">For Analysts</a>
+      <a href="#pricing" data-action="goto" data-arg="mkt-pricing">Pricing</a>
+      <a href="#contact" data-action="goto" data-arg="mkt-contact">Company</a>
+      <a href="#signin" class="nav-mobile-only" data-action="goto" data-arg="signin">Sign In</a>
     </div>
     <div class="nav-right">
-      <div class="nav-social">
-        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.7h2.6l.4-3h-3v-1.9c0-.9.2-1.5 1.5-1.5h1.6V4.2C15.9 4.1 15 4 14 4c-2.2 0-3.7 1.3-3.7 3.8v2.5H7.7v3h2.6V21h3.2z"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l6 3-6 3z" fill="currentColor" stroke="none"/></svg></a>
-      </div>
-      <a data-action="goto" data-arg="signin" style="font-size:13.5px;font-weight:600;color:var(--text-muted);">Sign In</a>
-      <a class="nav-cta" data-action="goto" data-arg="signup">Sign Up</a>
+      <a href="#signin" data-action="goto" data-arg="signin" style="font-size:13.5px;font-weight:600;color:var(--text-muted);">Sign In</a>
+      <a href="#signup" class="nav-cta" data-action="goto" data-arg="signup">Sign Up</a>
       <button class="nav-burger" aria-label="Menu">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -1384,118 +1566,11 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
   <header class="hero">
     <div class="wrap">
       <div>
-        <div class="eyebrow-pill"><span class="dot"></span> Now in open beta</div>
         <h1>A modern investment platform for analysts and investors.</h1>
         <p>Research companies, build valuation scenarios, analyze financials, and create investment-ready reports in one place.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="btn mkt-cta btn-white" data-action="goto" data-arg="mkt-platform">Sign Up For Free</a>
-          <a class="btn mkt-cta btn-outline" style="border-color:rgba(255,255,255,.3);color:#fff;" data-action="goto" data-arg="mkt-pricing">Explore the platform →</a>
-        </div>
-      </div>
-      <div class="hero-illus">
-        <div class="hero-glow-layer" id="hero-glow-layer"></div>
-        <div class="illus-card">
-          <svg viewBox="0 0 480 400" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-            <g class="illus-cluster" transform="translate(-6,-4) scale(0.97)">
-
-              <!-- mini grid + bar chart, top-left -->
-              <g class="pop-in" style="animation-delay:.05s">
-                <rect x="28" y="46" width="86" height="62" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
-                <line x1="28" y1="68" x2="114" y2="68" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-                <line x1="28" y1="88" x2="114" y2="88" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-                <line x1="56" y1="46" x2="56" y2="108" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-                <line x1="84" y1="46" x2="84" y2="108" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-                <rect x="36" y="86" width="10" height="22" fill="#4f8cff"/>
-                <rect x="52" y="74" width="10" height="34" fill="#6ea1ff"/>
-                <rect x="68" y="92" width="10" height="16" fill="#f2994a"/>
-                <rect x="90" y="64" width="10" height="44" fill="#4f8cff"/>
-              </g>
-
-              <!-- numbered 3D-ish bars -->
-              <g class="pop-in" style="animation-delay:.15s">
-                <text x="150" y="98" fill="#c7cef0" font-size="12" font-family="Inter" font-weight="700">1.</text>
-                <rect x="148" y="110" width="22" height="40" rx="4" fill="#ef5b52"/>
-                <rect x="148" y="110" width="22" height="6" rx="3" fill="#ffffff" opacity=".25"/>
-
-                <text x="181" y="84" fill="#c7cef0" font-size="12" font-family="Inter" font-weight="700">2.</text>
-                <rect x="179" y="96" width="22" height="54" rx="4" fill="#f2994a"/>
-                <rect x="179" y="96" width="22" height="6" rx="3" fill="#ffffff" opacity=".25"/>
-
-                <text x="212" y="68" fill="#c7cef0" font-size="12" font-family="Inter" font-weight="700">3.</text>
-                <rect x="210" y="80" width="22" height="70" rx="4" fill="#4f8cff"/>
-                <rect x="210" y="80" width="22" height="6" rx="3" fill="#ffffff" opacity=".25"/>
-
-                <text x="243" y="48" fill="#c7cef0" font-size="12" font-family="Inter" font-weight="700">4.</text>
-                <rect x="241" y="60" width="22" height="90" rx="4" fill="#8b5cf6"/>
-                <rect x="241" y="60" width="22" height="6" rx="3" fill="#ffffff" opacity=".25"/>
-              </g>
-
-              <!-- hexagon + triangles -->
-              <g class="pop-in" style="animation-delay:.25s">
-                <polygon points="350,48 389,69 389,111 350,132 311,111 311,69" fill="#5b8bff"/>
-                <polygon points="350,48 389,69 350,90 311,69" fill="#8bb0ff" opacity=".7"/>
-                <polygon points="384,132 406,148 384,168 366,148" fill="#ef5b52"/>
-                <polygon points="410,110 430,126 406,140" fill="#f2994a"/>
-                <polygon points="390,168 410,184 386,196" fill="#8b5cf6"/>
-              </g>
-
-              <!-- tick legend, top-right -->
-              <g class="pop-in" style="animation-delay:.35s">
-                <line x1="440" y1="95" x2="450" y2="95" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
-                <text x="455" y="99" fill="#c7cef0" font-size="10" font-family="Inter">D</text>
-                <line x1="440" y1="113" x2="450" y2="113" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
-                <text x="455" y="117" fill="#c7cef0" font-size="10" font-family="Inter">C</text>
-                <line x1="440" y1="131" x2="450" y2="131" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
-                <text x="455" y="135" fill="#c7cef0" font-size="10" font-family="Inter">B</text>
-                <line x1="440" y1="149" x2="450" y2="149" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
-                <text x="455" y="153" fill="#c7cef0" font-size="10" font-family="Inter">A</text>
-              </g>
-
-              <!-- ball track -->
-              <g class="pop-in" style="animation-delay:.45s">
-                <rect x="52" y="160" width="15" height="92" rx="7.5" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.16)"/>
-                <rect x="82" y="160" width="15" height="92" rx="7.5" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.16)"/>
-                <rect x="112" y="160" width="15" height="92" rx="7.5" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.16)"/>
-                <circle cx="59.5" cy="196" r="9" fill="#ef5b52"/>
-                <circle cx="89.5" cy="182" r="9" fill="#4f8cff"/>
-                <circle cx="119.5" cy="222" r="9" fill="#f2994a"/>
-              </g>
-
-              <!-- zigzag sparkline with 4 numbered points + arrow -->
-              <path class="spark-path" d="M52 296 L108 272 L163 290 L212 252" fill="none" stroke="#ffb444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M212 252 L227 240" fill="none" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round"/>
-              <polygon points="227,240 218,242 223,232" fill="#8b5cf6" opacity="0" class="pop-in" style="animation-delay:1.9s"/>
-              <circle class="spark-dot" style="animation-delay:.5s" cx="52" cy="296" r="5" fill="#ef5b52"/><text x="43" y="316" fill="#c7cef0" font-size="11" font-family="Inter">01</text>
-              <circle class="spark-dot" style="animation-delay:.9s" cx="108" cy="272" r="5" fill="#4f8cff"/><text x="99" y="292" fill="#c7cef0" font-size="11" font-family="Inter">02</text>
-              <circle class="spark-dot" style="animation-delay:1.3s" cx="163" cy="290" r="5" fill="#f2994a"/><text x="154" y="310" fill="#c7cef0" font-size="11" font-family="Inter">03</text>
-              <circle class="spark-dot" style="animation-delay:1.7s" cx="212" cy="252" r="5" fill="#8b5cf6"/><text x="203" y="272" fill="#c7cef0" font-size="11" font-family="Inter">04</text>
-
-              <!-- rainbow arc, tucked below the ball track / left of the sparkline -->
-              <g class="pop-in" style="animation-delay:.55s">
-                <path d="M40 360 a52,52 0 0 1 104,0" fill="none" stroke="#ef8a6b" stroke-width="9" stroke-linecap="round"/>
-                <path d="M52 360 a40,40 0 0 1 80,0" fill="none" stroke="#ffd166" stroke-width="9" stroke-linecap="round"/>
-                <path d="M64 360 a28,28 0 0 1 56,0" fill="none" stroke="#5b8bff" stroke-width="9" stroke-linecap="round"/>
-              </g>
-
-              <!-- diagonal rods, bottom-left corner, clear of the arc -->
-              <g class="pop-in" style="animation-delay:.15s">
-                <line x1="16" y1="396" x2="46" y2="366" stroke="rgba(255,255,255,.3)" stroke-width="3.5" stroke-linecap="round"/>
-                <line x1="30" y1="396" x2="60" y2="366" stroke="rgba(255,255,255,.2)" stroke-width="3.5" stroke-linecap="round"/>
-              </g>
-            </g>
-          </svg>
-        </div>
-        <div class="floating-card">
-          <div class="fc-title"><span class="dot"></span> Live Valuation Scenarios</div>
-          <svg viewBox="0 0 180 70" width="100%" height="66">
-            <rect x="6" y="30" width="26" height="34" rx="3" fill="#a9b8ff"/>
-            <rect x="42" y="16" width="26" height="48" rx="3" fill="#3b5fd9"/>
-            <rect x="78" y="38" width="26" height="26" rx="3" fill="#c7d0ff"/>
-            <rect x="114" y="8" width="26" height="56" rx="3" fill="#2646c4"/>
-          </svg>
-          <div style="display:flex;justify-content:space-between;font-size:9.5px;color:#8990a0;margin-top:4px;">
-            <span>Bear</span><span>Base</span><span>Bull</span><span>Bull+</span>
-          </div>
+        <div class="hero-ctas">
+          <a href="#signup" class="btn mkt-cta btn-white" data-action="goto" data-arg="signup">Sign Up For Free</a>
+          <a href="#pricing" class="btn mkt-cta btn-outline" data-action="goto" data-arg="mkt-pricing">See Pricing</a>
         </div>
       </div>
     </div>
@@ -1515,8 +1590,8 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
   <section>
     <div class="wrap">
       <div class="section-head reveal">
-        <h2>Analyze Smarter, Not Harder</h2>
-        <p>From peer comparisons to automated research reports, get the edge you need.</p>
+        <h2>Built around how analysts actually work</h2>
+        <p>Peer benchmarks, scenario models and source-cited research in one workspace.</p>
       </div>
       <div class="feat-grid reveal-stagger">
         <div class="feat-card reveal">
@@ -1599,34 +1674,24 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
           <p>Move assumptions and instantly see how valuation changes across bull, base and bear cases.</p>
         </div>
         <div class="scroll-slide" data-slide="3">
-          <h2>AI-backed research</h2>
+          <h2>AI&#8209;backed research</h2>
           <p>Ask questions, inspect evidence and build investment insights without leaving the workspace.</p>
         </div>
       </div>
 
       <div class="scroll-laptop-wrap">
-        <div class="scroll-laptop-shadow"></div>
-        <div class="scroll-laptop">
+        <div class="scroll-laptop" aria-hidden="true">
           <div class="scroll-laptop-screen">
             <div class="scroll-camera"></div>
-            <div class="scroll-app" data-screen="0">
-              <div class="sl-sidebar"><b>EquityLens</b><span>Overview</span><span>Financials</span><span>Valuation</span><span>AI Research</span></div>
-              <div class="sl-main"><div class="sl-top"><b>SOLV</b><span>Research Workspace</span></div><div class="sl-grid"><div class="sl-card wide"><i></i><i></i><i></i><div class="sl-chart"></div></div><div class="sl-card"><i></i><i></i><i></i><i></i></div><div class="sl-card wide table"><i></i><i></i><i></i><i></i><i></i></div></div></div>
-            </div>
-            <div class="scroll-app" data-screen="1">
-              <div class="sl-sidebar"><b>EquityLens</b><span>Overview</span><span class="on">Financials</span><span>Valuation</span><span>AI Research</span></div>
-              <div class="sl-main"><div class="sl-top"><b>Financial Analysis</b><span>FY2021–FY2026</span></div><div class="financial-lines"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
-            </div>
-            <div class="scroll-app" data-screen="2">
-              <div class="sl-sidebar"><b>EquityLens</b><span>Overview</span><span>Financials</span><span class="on">Valuation</span><span>AI Research</span></div>
-              <div class="sl-main"><div class="sl-top"><b>DCF Valuation</b><span>Base Case</span></div><div class="valuation-layout"><div class="sl-card"><div class="big-number">$120</div><small>Fair value / share</small><div class="sl-bars"><i></i><i></i><i></i></div></div><div class="sl-card"><div class="sl-chart curve"></div></div></div></div>
-            </div>
-            <div class="scroll-app" data-screen="3">
-              <div class="sl-sidebar"><b>EquityLens</b><span>Overview</span><span>Financials</span><span>Valuation</span><span class="on">AI Research</span></div>
-              <div class="sl-main"><div class="sl-top"><b>AI Research Assistant</b><span>Source-backed</span></div><div class="ai-box"><div class="ai-line long"></div><div class="ai-line"></div><div class="ai-line medium"></div><div class="ai-source">✓ SEC filing · Earnings call · Company report</div></div></div>
+            <div class="scroll-display">
+              <div class="scroll-app active" data-screen="0"><aside class="sa-side"><div class="sa-brand"><span class="sa-mark">EL</span>EquityLens</div><div class="sa-label">Workspace</div><div class="sa-item on">Overview</div><div class="sa-item">Valuation lab</div><div class="sa-item">AI research</div><div class="sa-item">Watchlist <em>5</em></div><div class="sa-label">Library</div><div class="sa-item">Saved reports</div><div class="sa-item">Portfolio</div></aside><div class="sa-main"><div class="sa-top"><div class="sa-search">Search company or ticker…</div><span class="sa-asof">Data as of Sep 12, 2026</span><span class="sa-av">AD</span></div><div class="sa-body"><div class="sa-co"><div><b>Solvane Industrial</b><span class="sa-tk">SOLV</span><div class="sa-meta">NYSE · Industrial Equipment &amp; Machinery</div></div><div class="sa-px"><b>$100.00</b><span class="pos">▲ $1.25 (+1.3%)</span></div></div><div class="sa-tabs"><span class="on">Overview</span><span>Financials</span><span>Valuation</span><span>Peers</span><span>Documents</span></div><div class="sa-tiles"><div class="sa-tile"><small>Market price</small><b>$100.00</b><span class="pos">▲ +1.3% today</span></div><div class="sa-tile"><small>Fair value (base)</small><b data-fill="fv">$120</b><span>DCF · WACC 9%</span></div><div class="sa-tile"><small>Implied upside</small><b class="pos" data-fill="upside">+19.8%</b><span>vs. market price</span></div><div class="sa-tile"><small>Market cap</small><b>$9,200M</b><span>92.0M shares</span></div></div><div class="sa-row"><div class="sa-panel"><div class="sa-ph">Price performance<span class="sa-rng"><i>1M</i><i>3M</i><i>6M</i><i class="on">1Y</i><i>5Y</i></span></div><div class="sa-chartwrap"><svg class="sa-chart" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path data-path="area" d="" fill="rgba(76,130,247,.13)"/><path data-path="line" d="" fill="none" stroke="#4c82f7" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></div></div><div class="sa-panel"><div class="sa-ph">Valuation summary<span class="sa-sub">DCF · Base case</span></div><div class="sa-fv"><div><small>Fair value</small><b data-fill="fv">$120</b></div><span class="sa-badge pos" data-fill="upside">+19.8%</span></div><div class="sa-scale"><i class="mkt" data-pos="mkt"></i><b data-pos="mkt">Market $100</b><i class="bear" data-pos="bear"></i><i class="base" data-pos="base"></i><i class="bull" data-pos="bull"></i></div><div class="sa-scale-lbl"><span data-pos="bear" data-fill="bear-l">Bear $77</span><span data-pos="base" data-fill="base-l">Base $120</span><span data-pos="bull" data-fill="bull-l">Bull $151</span></div><div class="sa-btn">Open valuation workspace →</div></div></div></div></div></div>
+              <div class="scroll-app" data-screen="1"><aside class="sa-side"><div class="sa-brand"><span class="sa-mark">EL</span>EquityLens</div><div class="sa-label">Workspace</div><div class="sa-item on">Overview</div><div class="sa-item">Valuation lab</div><div class="sa-item">AI research</div><div class="sa-item">Watchlist <em>5</em></div><div class="sa-label">Library</div><div class="sa-item">Saved reports</div><div class="sa-item">Portfolio</div></aside><div class="sa-main"><div class="sa-top"><div class="sa-search">Search company or ticker…</div><span class="sa-asof">Data as of Sep 12, 2026</span><span class="sa-av">AD</span></div><div class="sa-body"><div class="sa-co"><div><b>Solvane Industrial</b><span class="sa-tk">SOLV</span><div class="sa-meta">NYSE · Industrial Equipment &amp; Machinery</div></div><div class="sa-px"><b>$100.00</b><span class="pos">▲ $1.25 (+1.3%)</span></div></div><div class="sa-tabs"><span>Overview</span><span class="on">Financials</span><span>Valuation</span><span>Peers</span><span>Documents</span></div><div class="sa-seg"><i class="on">Income statement</i><i>Balance sheet</i><i>Cash flow</i></div><div class="sa-panel"><div class="sa-ph">Income statement<span class="sa-sub">FY2021–FY2025 · $ millions</span></div><table class="sa-table"><thead><tr><th>$ millions</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead><tbody><tr class="strong"><td>Revenue</td><td>4,200</td><td>4,550</td><td>4,890</td><td>5,310</td><td>5,720</td></tr><tr class="muted"><td>Revenue growth</td><td>—</td><td>8.3%</td><td>7.5%</td><td>8.6%</td><td>7.7%</td></tr><tr class=""><td>Gross profit</td><td>1,764</td><td>1,911</td><td>2,054</td><td>2,230</td><td>2,402</td></tr><tr class=""><td>Operating income</td><td>672</td><td>764</td><td>856</td><td>977</td><td>1,087</td></tr><tr class="muted"><td>Operating margin</td><td>16.0%</td><td>16.8%</td><td>17.5%</td><td>18.4%</td><td>19.0%</td></tr><tr class="strong"><td>Net income</td><td>488</td><td>559</td><td>632</td><td>726</td><td>811</td></tr><tr class=""><td>Diluted EPS ($)</td><td>5.30</td><td>6.08</td><td>6.87</td><td>7.89</td><td>8.82</td></tr></tbody></table></div></div></div></div>
+              <div class="scroll-app" data-screen="2"><aside class="sa-side"><div class="sa-brand"><span class="sa-mark">EL</span>EquityLens</div><div class="sa-label">Workspace</div><div class="sa-item">Overview</div><div class="sa-item on">Valuation lab</div><div class="sa-item">AI research</div><div class="sa-item">Watchlist <em>5</em></div><div class="sa-label">Library</div><div class="sa-item">Saved reports</div><div class="sa-item">Portfolio</div></aside><div class="sa-main"><div class="sa-top"><div class="sa-search">Search company or ticker…</div><span class="sa-asof">Data as of Sep 12, 2026</span><span class="sa-av">AD</span></div><div class="sa-body"><div class="sa-co"><div><b>Solvane Industrial</b><span class="sa-tk">SOLV</span><div class="sa-meta">NYSE · Industrial Equipment &amp; Machinery</div></div><div class="sa-px"><b>$100.00</b><span class="pos">▲ $1.25 (+1.3%)</span></div></div><div class="sa-tabs"><span>Overview</span><span>Financials</span><span class="on">Valuation</span><span>Peers</span><span>Documents</span></div><div class="sa-val"><div class="sa-panel"><div class="sa-ph">Assumptions<span class="sa-sub">Reset all</span></div><div class="sa-scn"><i>Bear</i><i class="on">Base</i><i>Bull</i></div><div class="sa-as"><span>Revenue growth</span><b>6.5%</b><div class="sa-sl"><i style="width:46%"></i></div></div><div class="sa-as"><span>Operating margin</span><b>19.5%</b><div class="sa-sl"><i style="width:48%"></i></div></div><div class="sa-as"><span>Tax rate</span><b>24.0%</b><div class="sa-sl"><i style="width:56%"></i></div></div><div class="sa-as"><span>Discount rate (WACC)</span><b>9.0%</b><div class="sa-sl"><i style="width:40%"></i></div></div><div class="sa-as"><span>Terminal growth</span><b>2.5%</b><div class="sa-sl"><i style="width:50%"></i></div></div></div><div class="sa-col"><div class="sa-panel sa-fvhero"><div><small>Fair value / share</small><b data-fill="fv2">$120.43</b></div><span class="sa-vs">vs</span><div><small>Market price</small><b>$100.00</b></div><span class="sa-badge pos" data-fill="upside">+19.8%</span></div><div class="sa-panel"><div class="sa-ph">Scenario comparison<span class="sa-sub">Value per share</span></div><div class="sa-bars"><div class="sa-bar"><span>Bear</span><div><i class="bear" data-bar="bear" style="width:46%"></i></div><b data-fill="bear">$77</b></div><div class="sa-bar"><span>Base</span><div><i class="base" data-bar="base" style="width:72%"></i></div><b data-fill="base">$120</b></div><div class="sa-bar"><span>Bull</span><div><i class="bull" data-bar="bull" style="width:91%"></i></div><b data-fill="bull">$151</b></div></div><div class="sa-note">Market price $100.00 · 5-year FCFF + Gordon growth terminal value</div></div><div class="sa-panel"><div class="sa-ph">5-year forecast<span class="sa-sub">Base case · $ millions</span></div><table class="sa-table" data-forecast><thead><tr><th></th><th>FY2026E</th><th>FY2027E</th><th>FY2028E</th><th>FY2029E</th><th>FY2030E</th></tr></thead><tbody><tr><td>Revenue</td><td>6,092</td><td>6,488</td><td>6,910</td><td>7,359</td><td>7,837</td></tr><tr class="strong"><td>FCFF</td><td>605</td><td>644</td><td>686</td><td>731</td><td>778</td></tr><tr class="muted"><td>PV of FCFF</td><td>555</td><td>542</td><td>530</td><td>518</td><td>506</td></tr></tbody></table></div></div></div></div></div></div>
+              <div class="scroll-app" data-screen="3"><aside class="sa-side"><div class="sa-brand"><span class="sa-mark">EL</span>EquityLens</div><div class="sa-label">Workspace</div><div class="sa-item">Overview</div><div class="sa-item">Valuation lab</div><div class="sa-item on">AI research</div><div class="sa-item">Watchlist <em>5</em></div><div class="sa-label">Library</div><div class="sa-item">Saved reports</div><div class="sa-item">Portfolio</div></aside><div class="sa-main"><div class="sa-top"><div class="sa-search">Search company or ticker…</div><span class="sa-asof">Data as of Sep 12, 2026</span><span class="sa-av">AD</span></div><div class="sa-body"><div class="sa-co"><div><b>Solvane Industrial</b><span class="sa-tk">SOLV</span><div class="sa-meta">NYSE · Industrial Equipment &amp; Machinery</div></div><div class="sa-px"><b>$100.00</b><span class="pos">▲ $1.25 (+1.3%)</span></div></div><div class="sa-tabs"><span>Overview</span><span>Financials</span><span>Valuation</span><span>Peers</span><span class="on">Documents</span></div><div class="sa-ai"><div class="sa-panel sa-chat"><div class="sa-ph">AI research<span class="sa-sub">Answers cite uploaded filings</span></div><div class="sa-q">What drove revenue growth?</div><div class="sa-a"><h6>Findings</h6><p>FY2025 growth came mainly from higher automation-segment volumes, plus price increases carried over from renegotiated FY2024 supply contracts.</p><h6>Evidence</h6><p><em>Reported</em>Automation volumes grew 11% year over year.<sup>1</sup></p><p><em>Reported</em>Average selling prices rose about 3%.<sup>2</sup></p><h6>Limitations</h6><p>FY2026 segment backlog was not disclosed.</p></div><div class="sa-input">Ask about this company…<span>Ask</span></div></div><div class="sa-panel sa-doc"><div class="sa-ph">2025 Annual Report<span class="sa-sub">Page 14</span></div><h6>Growth commentary</h6><p>Fiscal 2025 results reflected broad-based demand across the automation portfolio. <mark>Automation segment volumes grew 11% year-over-year, outpacing the legacy components segment.</mark></p><p>Pricing initiatives implemented in prior periods also contributed. <mark>Average selling prices rose approximately 3% following renegotiated multi-year supply agreements.</mark></p></div></div></div></div></div>
             </div>
           </div>
-          <div class="scroll-laptop-hinge"></div><div class="scroll-laptop-base"><div class="scroll-trackpad"></div></div>
+          <div class="scroll-laptop-base"></div>
+          <div class="scroll-laptop-shadow"></div>
         </div>
       </div>
     </div>
@@ -1635,8 +1700,8 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
   <section style="padding-top:0;">
     <div class="wrap">
       <div class="section-head reveal">
-        <h2>Trusted by Finance Professionals</h2>
-        <p>See how analysts and students are accelerating their workflow.</p>
+        <h2>What early users say</h2>
+        <p>Feedback from analysts and CFA candidates testing the workspace.</p>
       </div>
       <div class="test-grid reveal-stagger">
         <div class="test-card reveal">
@@ -1661,9 +1726,9 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
   <section style="padding-top:0;">
     <div class="wrap">
       <div class="final-cta reveal">
-        <h2>Ready to Transform Your Research?</h2>
-        <p>Join thousands of analysts using EquityLens to find alpha.</p>
-        <a class="btn mkt-cta btn-white" data-action="goto" data-arg="mkt-platform">Create Your Account →</a>
+        <h2>Start your first valuation in minutes.</h2>
+        <p>Free for students. No credit card required.</p>
+        <a href="#signup" class="btn mkt-cta btn-white" data-action="goto" data-arg="signup">Create Your Account →</a>
       </div>
     </div>
   </section>
@@ -1677,11 +1742,11 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
         <h1>Sophisticated Tools, Simplified Workflow</h1>
         <p>Dynamic DCF models, sensitivity analysis, and automated peer grouping — all in a workspace built for how analysts actually think.</p>
         <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-          <a class="btn mkt-cta btn-navy" data-action="goto" data-arg="signup">Open the app →</a>
-          <a class="btn mkt-cta btn-outline" data-action="goto" data-arg="mkt-pricing">View pricing</a>
+          <a href="#signup" class="btn mkt-cta btn-navy" data-action="goto" data-arg="signup">Open the app →</a>
+          <a href="#pricing" class="btn mkt-cta btn-outline" data-action="goto" data-arg="mkt-pricing">View pricing</a>
         </div>
         <div style="margin-top:14px;font-size:12px;color:var(--text-faint);">
-          Presenting this project? <span class="auth-link" data-action="demo-login">Skip login and view the demo workspace →</span>
+          Presenting this project? <a class="auth-link" href="#app" data-action="demo-login">Skip login and view the demo workspace →</a>
         </div>
       </div>
       <div>
@@ -1750,7 +1815,7 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Core financials & ratios</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Watchlist up to 5 companies</li>
           </ul>
-          <button class="btn mkt-cta btn-outline btn-block">Get Started</button>
+          <a href="#signup" class="btn mkt-cta btn-outline btn-block" data-action="goto" data-arg="signup">Get Started</a>
         </div>
         <div class="price-card pop reveal">
           <div class="pop-badge">Most Popular</div>
@@ -1762,7 +1827,7 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Scenario compare & PDF export</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Unlimited watchlist</li>
           </ul>
-          <button class="btn mkt-cta btn-white btn-block" style="color:var(--blue-dark);">Subscribe Now</button>
+          <a href="#signup" class="btn mkt-cta btn-white btn-block" data-action="goto" data-arg="signup">Subscribe Now</a>
         </div>
         <div class="price-card reveal">
           <div class="plan">Enterprise</div>
@@ -1772,7 +1837,7 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> API & data feed integrations</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Dedicated support</li>
           </ul>
-          <button class="btn mkt-cta btn-outline btn-block">Contact Sales</button>
+          <a href="#contact" class="btn mkt-cta btn-outline btn-block" data-action="goto" data-arg="mkt-contact">Contact Sales</a>
         </div>
       </div>
     </div>
@@ -1807,7 +1872,7 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
           <h3>See the Workspace in Action</h3>
           <p>Schedule a personalized demo or start exploring the sandbox.</p>
           <div class="demo-form">
-            <input type="email" placeholder="Enter your work email">
+            <input type="email" id="demo-email" placeholder="Enter your work email" aria-label="Work email" autocomplete="email">
             <button class="btn mkt-cta btn-navy" id="book-demo-btn">Book Demo →</button>
           </div>
           <div class="demo-checks">
@@ -1837,11 +1902,11 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
       </div>
       <div class="contact-form-card reveal">
         <div class="form-row">
-          <div class="form-field"><label>Full Name</label><input type="text" placeholder="Jane Doe"></div>
-          <div class="form-field"><label>Work Email</label><input type="email" placeholder="jane@company.com"></div>
+          <div class="form-field"><label for="contact-name">Full Name</label><input type="text" id="contact-name" placeholder="Jane Doe" autocomplete="name"></div>
+          <div class="form-field"><label for="contact-email">Work Email</label><input type="email" id="contact-email" placeholder="jane@company.com" autocomplete="email"></div>
         </div>
-        <div class="form-field"><label>Subject</label><input type="text" placeholder="How can we help you?"></div>
-        <div class="form-field"><label>Message</label><textarea placeholder="Please provide details about your inquiry…"></textarea></div>
+        <div class="form-field"><label for="contact-subject">Subject</label><input type="text" id="contact-subject" placeholder="How can we help you?"></div>
+        <div class="form-field"><label for="contact-message">Message</label><textarea id="contact-message" placeholder="Please provide details about your inquiry…"></textarea></div>
         <button class="btn mkt-cta btn-navy btn-block" id="send-msg-btn">Send Message <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></button>
       </div>
     </div>
@@ -1854,14 +1919,9 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
       EquityLens
     </div>
     <p class="tag">Committed to clarity, rigor, and delivering research tooling analysts can actually trust.</p>
-    <div class="footer-social">
-      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.7h2.6l.4-3h-3v-1.9c0-.9.2-1.5 1.5-1.5h1.6V4.2C15.9 4.1 15 4 14 4c-2.2 0-3.7 1.3-3.7 3.8v2.5H7.7v3h2.6V21h3.2z"/></svg></a>
-      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l6 3-6 3z" fill="currentColor" stroke="none"/></svg></a>
-    </div>
     <div class="footer-links">
-      <a data-action="goto" data-arg="mkt-home">Product</a><a data-action="goto" data-arg="mkt-platform">For Analysts</a><a data-action="goto" data-arg="mkt-pricing">Pricing</a><a data-action="goto" data-arg="mkt-contact">Company</a>
-      <a href="#">Terms and Conditions</a><a href="#">Privacy Policy</a>
+      <a href="/" data-action="goto" data-arg="mkt-home">Product</a><a href="#platform" data-action="goto" data-arg="mkt-platform">For Analysts</a><a href="#pricing" data-action="goto" data-arg="mkt-pricing">Pricing</a><a href="#contact" data-action="goto" data-arg="mkt-contact">Company</a>
+      <a href="/terms.html">Terms and Conditions</a><a href="/privacy.html">Privacy Policy</a>
     </div>
     <div class="footer-copy">© 2026 EquityLens. Demo site — not investment advice.</div>
   </footer>
@@ -1894,8 +1954,12 @@ footer p.tag{color:var(--text-muted);font-size:13.5px;max-width:420px;margin:0 a
         <div class="search-results" id="search-results"></div>
       </div>
       <div class="topbar-spacer"></div>
+      <button type="button" class="bell-btn theme-btn" id="theme-toggle" data-action="toggle-theme" title="Switch to dark mode" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="i-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
       <div style="position:relative;">
-        <button class="bell-btn" data-action="notifications" title="Notifications">
+        <button type="button" class="bell-btn" data-action="notifications" title="Notifications" aria-label="Notifications">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span class="bell-dot" id="bell-dot"></span>
         </button>
@@ -2150,6 +2214,7 @@ function pct(n,dec=1){ if(n===null||n===undefined||isNaN(n)) return 'N/A'; retur
 function pctPlain(n,dec=1){ if(n===null||n===undefined||isNaN(n)) return 'N/A'; return n.toFixed(dec) + '%'; }
 function setPath(obj, path, val){ const p=path.split('.'); let o=obj; for(let i=0;i<p.length-1;i++) o=o[p[i]]; o[p[p.length-1]]=val; }
 function getPath(obj, path){ return path.split('.').reduce((o,k)=>o?.[k], obj); }
+function esc(v){ return String(v).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(window._toastT); window._toastT=setTimeout(()=>t.classList.remove('show'),2200); }
 
 /* ============================================================
@@ -2256,6 +2321,7 @@ document.addEventListener('input', (e)=>{
 /* ============================================================
    MARKETING SITE (merged) — scroll reveal + page switching
 ============================================================ */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const revealObserver = ('IntersectionObserver' in window) ? new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
@@ -2273,6 +2339,8 @@ function initReveals(scope){
   });
 }
 function showMktPage(name){
+  const nl = document.getElementById('nav-links');
+  if(nl) nl.classList.remove('open');
   document.querySelectorAll('#marketing-root .page').forEach(p=>p.classList.remove('active'));
   const el = document.getElementById('page-'+name);
   if(el) el.classList.add('active');
@@ -2512,8 +2580,13 @@ function seededSeries(n, start, vol, seed){
   const pts=[start]; for(let i=1;i<n;i++){ const drift=(rnd()-0.48)*vol; pts.push(Math.max(2,pts[i-1]+drift)); }
   return pts;
 }
-const PRICE_SERIES_FULL = seededSeries(1260, 68, 2.1, 42);
-PRICE_SERIES_FULL[PRICE_SERIES_FULL.length-1] = COMPANY.price;
+const PRICE_SERIES_FULL = (function(){
+  const raw = seededSeries(1260, 68, 2.1, 42);
+  const k = COMPANY.price / raw[raw.length-1];
+  const out = raw.map(v=>v*k);
+  out[out.length-1] = COMPANY.price;
+  return out;
+})();
 const RANGE_DAYS = {'1M':21,'3M':63,'6M':126,'1Y':252,'5Y':1260};
 
 function sparklinePath(data, w, h, padY=4){
@@ -2531,15 +2604,12 @@ function priceChartSVG(range){
   const w=760,h=220;
   const path = sparklinePath(data,w,h,14);
   const areaPath = path + ` L${w},${h} L0,${h} Z`;
-  const min=Math.min(...data), max=Math.max(...data);
-  const lastY = h-14-((data[data.length-1]-min)/((max-min)||1))*(h-28);
   return `<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}" preserveAspectRatio="none" style="display:block;">
     <defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="rgba(76,130,247,.28)"/><stop offset="100%" stop-color="rgba(76,130,247,0)"/>
     </linearGradient></defs>
     <path d="${areaPath}" fill="url(#pg)" stroke="none"/>
-    <path d="${path}" fill="none" stroke="#4c82f7" stroke-width="1.6"/>
-    <circle cx="${w}" cy="${lastY}" r="3" fill="#4c82f7"/>
+    <path d="${path}" fill="none" stroke="#4c82f7" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
   </svg>`;
 }
 function barLineChart(labels, values, opts={}){
@@ -2567,11 +2637,11 @@ function fvBar(bear,base,bull,market){
     <div style="position:absolute;left:0;right:0;top:24px;height:4px;background:linear-gradient(90deg,var(--red),var(--amber),var(--teal));border-radius:2px;opacity:.5;"></div>
     ${[['Bear',bear,'red'],['Base',base,'blue'],['Bull',bull,'teal']].map(([lbl,v,c])=>`
       <div style="position:absolute;left:${pos(v)}%;top:16px;transform:translateX(-50%);text-align:center;">
-        <div style="width:10px;height:10px;border-radius:50%;background:var(--${c});border:2px solid #10141a;margin:0 auto;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--${c});border:2px solid var(--panel);margin:0 auto;"></div>
         <div style="font-size:10px;color:var(--text-faint);margin-top:4px;white-space:nowrap;">${lbl} ${money(v,0)}</div>
       </div>`).join('')}
     <div style="position:absolute;left:${pos(market)}%;top:-2px;transform:translateX(-50%);text-align:center;">
-      <div style="width:2px;height:26px;background:var(--ink);margin:0 auto;"></div>
+      <div style="width:2px;height:26px;background:var(--text);margin:0 auto;"></div>
       <div style="font-size:10px;color:var(--text);font-weight:700;margin-top:2px;">Market ${money(market,0)}</div>
     </div>
   </div>`;
@@ -2602,7 +2672,7 @@ function researchPulsePanel(upside){
   const score = Math.max(30, Math.min(96, Math.round(58 + upside*0.85 + (niCAGR-8)*0.6)));
   const scoreColor = score >= 70 ? 'var(--teal)' : score >= 45 ? 'var(--amber)' : 'var(--red)';
   return `
-  <div class="panel reveal">
+  <div class="panel">
     <div class="panel-head"><div class="panel-title">Research pulse</div><div class="panel-sub">Updated after Q2 results</div></div>
     <div class="panel-pad" style="text-align:center;">
       ${pulseGauge(score, scoreColor)}
@@ -2783,7 +2853,7 @@ function renderValuation(){
       <span style="font-weight:500;color:var(--text-faint);font-size:11.5px;">· Discounted Cash Flow · Data as of Sep 12, 2026</span>
     </div>
     <div class="flex gap10 items-center">
-      ${isDirty?'<span class="dirty-flag">Unsaved changes</span>':''}
+      <span id="val-dirty">${isDirty?'<span class="dirty-flag">Unsaved changes</span>':''}</span>
       <select class="pill" id="model-select"><option>Discounted Cash Flow</option><option disabled>Comparable Companies (soon)</option><option disabled>Sum-of-the-Parts (soon)</option></select>
       <button class="btn btn-ghost" data-action="compare-scenarios"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg> Compare scenarios</button>
       <button class="btn btn-ghost" data-action="export-valuation"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg> Export valuation</button>
@@ -2811,7 +2881,7 @@ function renderValuation(){
     </div>
 
     <!-- RIGHT: results -->
-    <div>
+    <div id="val-results">
       ${dcf.invalid?`<div class="error-banner"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg> Terminal growth must be lower than the discount rate (WACC). Results below are shown with the last valid inputs where possible.</div>`:''}
       <div class="panel" style="margin-bottom:16px;">
         <div class="fv-hero">
@@ -2859,7 +2929,7 @@ function renderValuation(){
   `;
 }
 function bridgeStep(label,val,strong){
-  return `<div class="bridge-step" style="${strong?'border-color:var(--blue);':''}"><div class="lbl">${label}</div><div class="v" style="${strong?'color:#bcd0ff;font-size:17px;':''}">${val}</div></div>`;
+  return `<div class="bridge-step" style="${strong?'border-color:var(--blue);':''}"><div class="lbl">${label}</div><div class="v" style="${strong?'color:var(--blue);font-size:17px;':''}">${val}</div></div>`;
 }
 function assumpRow(key,val){
   const meta = ASSUMP_META[key];
@@ -2901,7 +2971,6 @@ function forecastTable(dcf){
     </tr></thead>
     <tbody>
       ${row('Revenue', histRevenue, dcf.years.map(y=>y.revenue), v=>fmt(v,0))}
-      ${row('Operating margin', histIdx.map(i=>COMPANY.opIncome[i]/COMPANY.revenue[i]*100), dcf.years.map(y=>y.nopat), (v,i)=>'', true).replace(/<td>.*?<\/td>/,'')}
       <tr><td class="row-label">Operating margin</td>
         ${histIdx.map(i=>`<td>${(COMPANY.opIncome[i]/COMPANY.revenue[i]*100).toFixed(1)}%</td>`).join('')}
         ${dcf.years.map((y,i)=>`<td class="col-forecast ${i===0?'divider-col':''}">${(state.assumptions.margin).toFixed(1)}%</td>`).join('')}
@@ -3102,7 +3171,7 @@ function chatBubble(m){
       <span style="font-size:12px;color:var(--text-muted);"> ${e.text} ${e.doc?`<span class="cite" data-action="cite" data-arg="${e.doc}|${e.hl}">↗</span>`:''}</span>
     </div>`).join('');
   const insufficient = m.a.insufficient ? `<div class="insufficient">Insufficient source evidence.</div>` : '';
-  return `<div class="msg-user">${m.q}</div>
+  return `<div class="msg-user">${esc(m.q)}</div>
   <div class="msg-ai">
     ${insufficient || `
     <div class="ai-block" style="padding-top:0;"><h4>Findings</h4><p>${m.a.findings}</p></div>
@@ -3134,7 +3203,7 @@ function renderWatchlist(){
   <div class="toolbar">
     <div class="search-wrap wl-search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-      <input id="wl-search" placeholder="Search watchlist…" value="${state.wlQuery}">
+      <input id="wl-search" placeholder="Search watchlist…" value="${esc(state.wlQuery)}">
     </div>
   </div>
   <div class="panel">
@@ -3338,7 +3407,7 @@ function renderAuth(mode){
   const isSignup = mode === 'signup';
   return `<div class="auth-shell">
     <div class="auth-visual">
-      <div class="eyebrow-pill"><span class="dot"></span> ${isSignup ? 'Now in open beta' : 'Welcome back'}</div>
+      <div class="eyebrow-pill"><span class="dot"></span> ${isSignup ? 'Free to start' : 'Welcome back'}</div>
       <h2>${isSignup ? "Everything you've seen, in your own workspace." : 'Pick up where you left off.'}</h2>
       <p>${isSignup ? 'Create a free account and get the full EquityLens toolkit.' : 'Sign in to reach your saved valuations, watchlist, and research reports.'}</p>
       ${authFeatureList()}
@@ -3350,7 +3419,7 @@ function renderAuth(mode){
           <span style="font-weight:700;font-size:15px;letter-spacing:-.02em;">EquityLens</span>
         </div>
         <h1>${isSignup ? 'Create your account' : 'Sign in'}</h1>
-        <p class="auth-sub">${isSignup ? "Already have one? " : "New here? "}<span class="auth-link" data-action="goto" data-arg="${isSignup ? 'signin' : 'signup'}">${isSignup ? 'Sign in' : 'Create a free account'}</span></p>
+        <p class="auth-sub">${isSignup ? "Already have one? " : "New here? "}<a class="auth-link" href="#${isSignup ? 'signin' : 'signup'}" data-action="goto" data-arg="${isSignup ? 'signin' : 'signup'}">${isSignup ? 'Sign in' : 'Create a free account'}</a></p>
         ${socialButtons()}
         <form id="auth-form" data-mode="${mode}" novalidate>
           ${isSignup ? `<div class="auth-field">
@@ -3368,16 +3437,16 @@ function renderAuth(mode){
             ${pwField(isSignup ? 'At least 8 characters' : 'Enter your password', isSignup ? 'new-password' : 'current-password', isSignup ? 'Password must be at least 8 characters.' : 'Enter your password.')}
           </div>
           ${isSignup ? `<div class="auth-row-between" style="margin-bottom:20px;">
-            <label class="auth-check"><input type="checkbox" checked> I agree to the Terms &amp; Privacy Policy</label>
+            <label class="auth-check"><input type="checkbox" checked> <span>I agree to the <a class="auth-link" href="/terms.html" target="_blank" rel="noopener">Terms</a> &amp; <a class="auth-link" href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a></span></label>
           </div>` : `<div class="auth-row-between">
             <label class="auth-check"><input type="checkbox" checked> Remember me</label>
-            <span class="auth-link">Forgot password?</span>
+            <a class="auth-link" href="#signin" data-action="forgot-pw">Forgot password?</a>
           </div>`}
           <button type="submit" class="btn btn-primary auth-submit"><span class="btn-label">${isSignup ? 'Create account' : 'Sign in'}</span><span class="spinner"></span></button>
         </form>
         ${isSignup
           ? `<div class="auth-terms">Free plan includes 1 saved valuation and a 5-company watchlist. No credit card required.</div>`
-          : `<div class="auth-switch">Don't have an account? <span class="auth-link" data-action="goto" data-arg="signup">Sign up free</span></div>`}
+          : `<div class="auth-switch">Don't have an account? <a class="auth-link" href="#signup" data-action="goto" data-arg="signup">Sign up free</a></div>`}
         <div class="demo-access-box">
           <div class="t">Presenting to a mentor or reviewer?</div>
           <button type="button" class="btn btn-outline btn-block" data-action="demo-login">Continue as Guest (Demo)</button>
@@ -3426,7 +3495,7 @@ function skeletonScreen(){
   </div>
   <div class="panel panel-pad"><div class="skel" style="height:220px;"></div></div>`;
 }
-function render(){
+function renderView(){
   const mktEl = document.getElementById('marketing-root');
   const shellEl = document.getElementById('shell');
   const authEl = document.getElementById('authpage');
@@ -3483,14 +3552,33 @@ function render(){
 document.addEventListener('click', (e)=>{
   const faq = e.target.closest('.faq-item');
   if(faq){ faq.classList.toggle('open'); return; }
-  if(e.target.closest('#book-demo-btn')){ toast('Demo request received (this is a demo).'); return; }
-  if(e.target.closest('#send-msg-btn')){ toast('Message sent (this is a demo).'); return; }
-  if(e.target.closest('.nav-burger')){
-    const nl = document.getElementById('nav-links');
-    nl.style.display = (nl.style.display === 'flex') ? 'none' : 'flex';
-    nl.style.cssText += 'position:absolute;top:72px;left:0;right:0;background:#fff;flex-direction:column;padding:18px 28px;border-bottom:1px solid var(--border);gap:16px;z-index:40;';
+  const linkEl = e.target.closest('a[href]');
+  if(linkEl && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0)) return; // let the browser open new tabs
+  if(e.target.closest('#book-demo-btn')){
+    const em = document.getElementById('demo-email');
+    if(!em || !EMAIL_RE.test(em.value.trim())){ toast('Enter a valid work email'); if(em) em.focus(); return; }
+    em.value = '';
+    toast('Demo request received. This is a demo site, so no email is sent.');
     return;
   }
+  if(e.target.closest('#send-msg-btn')){
+    const ids = ['contact-name','contact-email','contact-subject','contact-message'];
+    const fields = ids.map(id=>document.getElementById(id));
+    const missing = fields.find(f=>f && !f.value.trim());
+    if(missing){ toast('Please fill in every field'); missing.focus(); return; }
+    if(!EMAIL_RE.test(fields[1].value.trim())){ toast('Enter a valid work email'); fields[1].focus(); return; }
+    fields.forEach(f=>{ f.value=''; });
+    toast('Message received. This is a demo site, so nothing is sent.');
+    return;
+  }
+  const burger = e.target.closest('.nav-burger');
+  const navLinks = document.getElementById('nav-links');
+  if(burger){
+    const open = navLinks.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    return;
+  }
+  if(navLinks && !e.target.closest('#nav-links')) navLinks.classList.remove('open');
   const el = e.target.closest('[data-action]');
   const searchResults = document.getElementById('search-results');
   if(!e.target.closest('.search-wrap') && searchResults) searchResults.classList.remove('show');
@@ -3499,6 +3587,7 @@ document.addEventListener('click', (e)=>{
   const notifMenu0 = document.getElementById('notif-menu');
   if(notifMenu0 && !e.target.closest('.bell-btn') && !e.target.closest('#notif-menu')) notifMenu0.classList.remove('show');
   if(!el) return;
+  if(el.tagName === 'A') e.preventDefault();
   const action = el.dataset.action, arg = el.dataset.arg;
   switch(action){
     case 'toggle-sidebar': state.sidebarCollapsed = !state.sidebarCollapsed; render(); break;
@@ -3514,6 +3603,8 @@ document.addEventListener('click', (e)=>{
     }
     case 'toggle-pw': { const input = el.previousElementSibling; input.type = (input.type==='password') ? 'text' : 'password'; break; }
     case 'social-auth': toast('Social sign-in is not wired up in this demo.'); break;
+    case 'forgot-pw': toast('Password reset is not available in this demo. Use “Continue as Guest”.'); break;
+    case 'toggle-theme': toggleTheme(); break;
     case 'company-tab': state.companyTab = arg; render(); break;
     case 'price-range': state.priceRange = arg; render(); break;
     case 'watchlist-add': toast('Added Solvane Industrial (SOLV) to watchlist'); break;
@@ -3574,12 +3665,21 @@ function syncAssumpInputs(key){
   renderValuationResultsOnly();
 }
 function renderValuationResultsOnly(){
-  if(state.screen==='company' && state.companyTab==='valuation'){
-    const content = document.getElementById('content');
-    content.innerHTML = renderCompanyHeader() + renderValuation();
-  }
+  if(!(state.screen==='company' && state.companyTab==='valuation')) return;
+  const tmp = document.createElement('div');
+  tmp.innerHTML = renderValuation();
+  ['val-results','val-dirty'].forEach(id=>{
+    const fresh = tmp.querySelector('#'+id), cur = document.getElementById(id);
+    if(fresh && cur) cur.replaceWith(fresh);
+  });
 }
-function renderWatchlistOnly(){ if(state.screen==='watchlist') document.getElementById('content').innerHTML = renderWatchlist(); }
+function renderWatchlistOnly(){
+  if(state.screen!=='watchlist') return;
+  const tmp = document.createElement('div');
+  tmp.innerHTML = renderWatchlist();
+  const fresh = tmp.querySelector('.panel'), cur = document.querySelector('#content > .panel');
+  if(fresh && cur) cur.replaceWith(fresh);
+}
 
 function handleAsk(q){
   if(/compensation/i.test(q)){
@@ -3624,10 +3724,67 @@ document.addEventListener('keydown',(e)=>{
   if(e.key==='Enter' && document.activeElement.id==='chat-input'){ const v=document.activeElement.value.trim(); if(v) handleAsk(v); document.activeElement.value=''; }
 });
 
+/* ============================================================
+   ROUTING — every screen has a real URL (#pricing, #signup, #app …)
+============================================================ */
+const HASH_TO_SCREEN = {'':'mkt-home', home:'mkt-home', platform:'mkt-platform', pricing:'mkt-pricing', contact:'mkt-contact', signin:'signin', signup:'signup', app:'company'};
+const APP_SCREENS = ['company','watchlist','savedreports','portfolio'];
+function currentHash(){ return decodeURIComponent(location.hash.replace(/^#\/?/, '')); }
+function hashForScreen(sc){
+  if(sc === 'mkt-home') return '';
+  if(sc.indexOf('mkt-') === 0) return sc.slice(4);
+  if(sc === 'signin' || sc === 'signup') return sc;
+  return 'app';
+}
+function render(){
+  renderView();
+  const h = hashForScreen(state.screen);
+  if(h !== currentHash()){
+    try{ history.pushState(null, '', h ? '#'+h : location.pathname + location.search); }catch(err){}
+  }
+}
+window.addEventListener('popstate', ()=>{
+  const sc = HASH_TO_SCREEN[currentHash()];
+  if(sc === undefined) return;
+  if(sc === 'company'){
+    if(APP_SCREENS.indexOf(state.screen) === -1){ state.screen = 'company'; state.companyTab = 'overview'; }
+  } else {
+    state.screen = sc;
+  }
+  state.openReport = null;
+  renderView();
+});
+
+/* ============================================================
+   THEME (light / dark) — applied to the app workspace
+============================================================ */
+function applyThemeButton(){
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const b = document.getElementById('theme-toggle');
+  if(!b) return;
+  const label = dark ? 'Switch to light mode' : 'Switch to dark mode';
+  b.title = label; b.setAttribute('aria-label', label); b.setAttribute('aria-pressed', dark ? 'true' : 'false');
+}
+function toggleTheme(){
+  const dark = document.documentElement.getAttribute('data-theme') !== 'dark';
+  if(dark) document.documentElement.setAttribute('data-theme', 'dark');
+  else document.documentElement.removeAttribute('data-theme');
+  try{ localStorage.setItem('el-theme', dark ? 'dark' : 'light'); }catch(err){}
+  applyThemeButton();
+}
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape' && state.openReport){ state.openReport = null; render(); }
+});
+
 /* boot */
 if(new URLSearchParams(window.location.search).get('demo') === '1'){
   state.screen = 'company'; state.companyTab = 'overview';
 }
+{
+  const initial = HASH_TO_SCREEN[currentHash()];
+  if(initial) state.screen = initial;
+}
+applyThemeButton();
 render();
 setTimeout(()=>{ state.loading=false; render(); if(state.screen==='company'){ toast('Viewing demo workspace as Guest'); } }, 700);
 </script>
@@ -3638,27 +3795,43 @@ setTimeout(()=>{ state.loading=false; render(); if(state.screen==='company'){ to
   if(!section)return;
   const slides=[...section.querySelectorAll('.scroll-slide')];
   const apps=[...section.querySelectorAll('.scroll-app')];
-  const laptop=section.querySelector('.scroll-laptop-wrap');
-  const shadow=section.querySelector('.scroll-laptop-shadow');
-  let ticking=false;
-  function updateScrollShowcase(){
+
+  // Fill the mock screens from the same DCF engine and price series the app uses.
+  try{
+    const bear=computeDCF(PRESETS.bear).perShare, base=computeDCF(PRESETS.base).perShare, bull=computeDCF(PRESETS.bull).perShare;
+    const px=COMPANY.price, up=(base/px-1)*100;
+    const usd=(v,d)=>'$'+v.toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});
+    const fills={fv:usd(base), fv2:usd(base,2), upside:(up>=0?'+':'')+up.toFixed(1)+'%',
+      bear:usd(bear), base:usd(base), bull:usd(bull),
+      'bear-l':'Bear '+usd(bear), 'base-l':'Base '+usd(base), 'bull-l':'Bull '+usd(bull)};
+    section.querySelectorAll('[data-fill]').forEach(el=>{ const v=fills[el.dataset.fill]; if(v!==undefined) el.textContent=v; });
+    const lo=Math.min(bear,px)*0.85, hi=Math.max(bull,px)*1.08;
+    const vals={bear:bear, base:base, bull:bull, mkt:px};
+    section.querySelectorAll('[data-pos]').forEach(el=>{ el.style.left=((vals[el.dataset.pos]-lo)/(hi-lo)*100).toFixed(2)+'%'; });
+    const fcT=section.querySelector('[data-forecast] tbody');
+    if(fcT){ const yrs=computeDCF(PRESETS.base).years; const f=v=>Math.round(v).toLocaleString('en-US');
+      const rowsH=[['Revenue','',y=>y.revenue],['FCFF','strong',y=>y.fcff],['PV of FCFF','muted',y=>y.pv]];
+      fcT.innerHTML=rowsH.map(r=>'<tr class="'+r[1]+'"><td>'+r[0]+'</td>'+yrs.map(y=>'<td>'+f(r[2](y))+'</td>').join('')+'</tr>').join(''); }
+    section.querySelectorAll('[data-bar]').forEach(el=>{ el.style.width=(vals[el.dataset.bar]/(bull*1.1)*100).toFixed(1)+'%'; });
+    const data=PRICE_SERIES_FULL.slice(-252);
+    const line=sparklinePath(data,400,120,8);
+    section.querySelectorAll('[data-path="line"]').forEach(p=>p.setAttribute('d',line));
+    section.querySelectorAll('[data-path="area"]').forEach(p=>p.setAttribute('d',line+' L400,120 L0,120 Z'));
+  }catch(err){ /* static fallback values stay in place */ }
+
+  let ticking=false, current=-1;
+  function update(){
+    ticking=false;
     const rect=section.getBoundingClientRect();
     const max=Math.max(1,section.offsetHeight-window.innerHeight);
     const progress=Math.min(1,Math.max(0,-rect.top/max));
-    const n=slides.length;
-    const raw=progress*n;
-    let index=Math.min(n-1,Math.floor(raw));
-    // Give each screen a smooth handoff around the middle of its scroll segment.
+    const index=Math.min(slides.length-1,Math.floor(progress*slides.length));
+    if(index===current)return;
+    current=index;
     slides.forEach((el,i)=>el.classList.toggle('active',i===index));
     apps.forEach((el,i)=>el.classList.toggle('active',i===index));
-    const local=raw-index;
-    const enter=Math.min(1,local*2);
-    laptop.style.transform='translateX('+(9-9*enter)+'vw)';
-    shadow.style.transform='scale('+(0.88+0.12*enter)+')';
-    shadow.style.opacity=.45+.3*enter;
-    ticking=false;
   }
-  function requestUpdate(){if(!ticking){ticking=true;requestAnimationFrame(updateScrollShowcase);}}
+  function requestUpdate(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
   window.addEventListener('scroll',requestUpdate,{passive:true});
   window.addEventListener('resize',requestUpdate);
   requestUpdate();
