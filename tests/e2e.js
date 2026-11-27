@@ -105,6 +105,37 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   console.log('Watchlist badge after remove', await page.$eval('.nav-badge', b => b.textContent));
   await page.click('[data-action="watchlist-add"]'); await sleep(200);
   await page.click('[data-action="nav"][data-arg="valuation"]'); await sleep(300);
+  // business analysis checklist: UI must agree with the API
+  await page.click('[data-action="nav"][data-arg="analysis"]'); await sleep(400);
+  const ui = await page.evaluate(() => ({
+    items: document.querySelectorAll('.ba-q, .ba-group').length,
+    verdicts: [...document.querySelectorAll('.ba-q .badge, .ba-group .badge')].map(b => b.textContent.trim()),
+    notes: [...document.querySelectorAll('.ba-note')].map(n => n.textContent.trim()),
+  }));
+  const api = await page.evaluate(async () => (await fetch('/api/analysis')).json());
+  const apiVerdicts = [...api.qualitative, ...api.financial].map(x => ({ pass: 'Pass', watch: 'Watch', fail: 'Fail' })[x.verdict]);
+  const same = JSON.stringify(ui.verdicts) === JSON.stringify(apiVerdicts) && JSON.stringify(ui.notes) === JSON.stringify(api.financial.map(f => f.note));
+  console.log('Analysis items', ui.items, 'UI matches API', same);
+  if (ui.items !== 12 || !same) errors.push('analysis mismatch');
+  await page.click('[data-action="nav"][data-arg="valuation"]'); await sleep(300);
+  // UX: chart hover tooltip, keyboard navigation, deep links
+  await page.click('[data-action="nav"][data-arg="overview"]'); await sleep(400);
+  const svgBox = await (await page.$('#price-chart-wrap svg')).boundingBox();
+  await page.mouse.move(svgBox.x + svgBox.width * 0.5, svgBox.y + svgBox.height / 2); await sleep(150);
+  const tip = await page.$eval('.pc-tip', t => getComputedStyle(t).display !== 'none' ? t.textContent : '');
+  console.log('Chart tooltip', JSON.stringify(tip));
+  if (!/\$\d/.test(tip) || !/2026|2025/.test(tip)) errors.push('chart tooltip missing');
+  await page.focus('.nav-item[data-arg="analysis"]'); await page.keyboard.press('Enter'); await sleep(300);
+  const kbHash = await page.evaluate(() => location.hash);
+  console.log('Keyboard nav ->', kbHash);
+  if (kbHash !== '#app/analysis') errors.push('keyboard nav failed');
+  await page.reload({ waitUntil: 'networkidle0' }); await sleep(900);
+  const afterReload = await page.evaluate(() => state.companyTab);
+  console.log('Deep link survives reload', afterReload);
+  if (afterReload !== 'analysis') errors.push('deep link lost on reload');
+  await page.goBack(); await sleep(300);
+  console.log('Back ->', await page.evaluate(() => location.hash + ' ' + state.companyTab));
+  await page.click('[data-action="nav"][data-arg="valuation"]'); await sleep(300);
   // theme toggle
   await page.click('#theme-toggle'); await sleep(300);
   console.log('THEME', await page.evaluate(() => document.documentElement.dataset.theme), await page.evaluate(() => localStorage.getItem('el-theme')));

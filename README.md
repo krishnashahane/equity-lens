@@ -16,12 +16,17 @@ An equity research and valuation workspace: company overview, financial statemen
 - Terms and Privacy pages
 
 **App workspace** (`/#app`, or "Continue as Guest" on sign-in)
-- **Overview** — key metrics, price chart (1M–5Y), valuation summary, research pulse, peers
+- **Overview** — key metrics, price chart (1M–5Y) with hover for date and price, valuation summary, checklist score, research pulse, peers
+- **Business analysis** — a 12-point checklist with a Pass / Watch / Fail verdict for each item and CSV export:
+  1. Business quality · 2. Product/service relevance · 3. Competitive advantage · 4. Business model (analyst assessment, linked to the source filing)
+  5. Revenue and profit over 5 years · 6. EBITDA · 7. Debt-to-equity · 8. Profitability · 9. ROE · 10. ROCE · 11. Net profit margin · 12. Dividend history (computed from the statements, FY2021–FY2025, with 5-year change)
 - **Financials** — income statement, balance sheet and cash flow; annual/quarterly; absolute or % of revenue
 - **Valuation lab** — 5-year FCFF DCF with Gordon growth terminal value, editable assumptions, valuation bridge, forecast table, WACC × terminal-growth sensitivity grid, scenario comparison and CSV export
 - **AI research** — questions are answered from the indexed annual report and reported financials, with evidence tags and citations that jump to the highlighted source passage; unanswerable questions are flagged instead of guessed
 - **Watchlist, Saved reports (print / save as PDF), Portfolio**
 - Light / dark theme, 38 currencies, ⌘K / Ctrl+K command palette
+- Every screen and tab has its own URL (`/#app/analysis`, `/#app/valuation`, …), so refresh, Back and shared links land in the right place
+- Fully keyboard-usable: every control is reachable with Tab and works with Enter/Space; Esc closes dialogs and menus
 
 ## API
 
@@ -33,6 +38,7 @@ Vercel serverless functions (Node 18+, no dependencies) in `api/`, with shared l
 | `/api/valuation` | GET | Company data, scenario presets and input limits |
 | `/api/valuation?scenario=base` | GET | Valuation for `bear`, `base` or `bull` |
 | `/api/valuation` | POST | Valuation for custom inputs: `{"assumptions": {growth, margin, tax, reinvest, wacc, termGrowth}}` (percentages) |
+| `/api/analysis` | GET | 12-point business analysis checklist: verdicts, notes and FY2021–FY2025 metrics |
 | `/api/research` | POST | `{"question": "..."}` → findings, evidence with citations, limitations |
 | `/api/contact` | POST | `{name, email, subject, message}` |
 | `/api/demo` | POST | `{email}` |
@@ -58,9 +64,10 @@ index.html            marketing site + app workspace (HTML, CSS, vanilla JS)
 terms.html            terms and conditions
 privacy.html          privacy policy
 api/                  serverless endpoints
-  health.js  valuation.js  research.js  contact.js  demo.js
+  health.js  valuation.js  analysis.js  research.js  contact.js  demo.js
   _lib/               shared code (not exposed as routes)
     dcf.js            DCF model (same maths as the browser)
+    analysis.js       12-point business analysis checklist
     research.js       source retrieval for research answers
     http.js           JSON, validation, body limits, rate limiting
     notify.js         email delivery (Resend) or log fallback

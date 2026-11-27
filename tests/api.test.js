@@ -108,3 +108,38 @@ test('malformed JSON → 400, wrong method → 405', async () => {
 test('oversized body → 413', async () => {
   assert.equal((await post('/api/research', { question: 'x'.repeat(20000) })).status, 413);
 });
+
+// ---- business analysis checklist ----
+const { analyze } = require('../api/_lib/analysis');
+
+test('checklist covers all 12 items in order', () => {
+  const a = analyze();
+  const items = [...a.qualitative, ...a.financial];
+  assert.deepEqual(items.map(x => x.n), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+  assert.equal(a.score.total, 12);
+  assert.equal(a.score.pass + a.score.watch + a.score.fail, 12);
+});
+
+test('checklist ratios are computed correctly', () => {
+  const rows = Object.fromEntries(analyze().financial.flatMap(f => f.rows.map(r => [r.key, r.values])));
+  const last = a => a[a.length - 1];
+  assert.ok(Math.abs(last(rows.roe) - 810.9 / 4170 * 100) < 0.01);       // NI / year-end equity
+  assert.ok(Math.abs(last(rows.roce) - 1087 / (5390 - 480) * 100) < 0.01); // EBIT / (TA - CL)
+  assert.ok(Math.abs(last(rows.de) - 500 / 4170) < 0.0001);
+  assert.equal(last(rows.ebitda), 1267);
+  assert.ok(Math.abs(last(rows.payout) - 1.9 / 8.82 * 100) < 0.01);
+});
+
+test('GET /api/analysis', async () => {
+  const r = await fetch(base + '/api/analysis');
+  assert.equal(r.status, 200);
+  const j = await r.json();
+  assert.equal(j.ok, true);
+  assert.equal(j.financial.length, 8);
+  assert.equal(j.qualitative.length, 4);
+});
+
+test('research answers checklist questions (ROE, dividends)', () => {
+  assert.ok(answer('What are ROE and ROCE?').evidence.some(e => /Return on equity/.test(e.text)));
+  assert.ok(answer('Is the dividend growing?').evidence.some(e => /dividend was raised/.test(e.text)));
+});
