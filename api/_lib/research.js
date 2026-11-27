@@ -1,6 +1,7 @@
 'use strict';
 
 const { COMPANY, PRESETS, computeDCF } = require('./dcf');
+const { metrics, QUALITATIVE } = require('./analysis');
 
 // Passages from the indexed FY2025 annual report. Ids match the citation
 // targets in the browser (DOCS.ar2025.passages), so a cited answer jumps to
@@ -53,6 +54,24 @@ function financialFacts() {
       interp: true,
       text: `The base-case DCF implies about $${base.perShare.toFixed(0)} per share versus a $${COMPANY.price.toFixed(0)} market price (${pct(base.perShare, COMPANY.price)}%); bear and bull cases span $${bear.perShare.toFixed(0)}–$${bull.perShare.toFixed(0)}.`,
     },
+    ...checklistFacts(),
+  ];
+}
+
+// Facts from the business analysis checklist (returns, EBITDA, dividends, moat).
+function checklistFacts() {
+  const m = metrics();
+  const f1 = v => v.toFixed(1);
+  const q = key => QUALITATIVE.find(x => x.key === key).text;
+  return [
+    { keywords: ['roe', 'return', 'returns', 'equity'], text: `Return on equity was ${f1(last(m.roe))}% in FY2025, up from ${f1(m.roe[0])}% in FY2021.` },
+    { keywords: ['roce', 'return', 'returns', 'capital', 'employed'], text: `Return on capital employed (EBIT ÷ total assets less current liabilities) was ${f1(last(m.roce))}% in FY2025.` },
+    { keywords: ['ebitda'], text: `EBITDA was $${Math.round(last(m.ebitda)).toLocaleString('en-US')}M in FY2025, a ${f1(last(m.ebitdaMargin))}% margin.` },
+    { keywords: ['debt', 'leverage', 'gearing', 'de', 'debt-to-equity'], text: `Debt-to-equity fell from ${m.de[0].toFixed(2)}x in FY2021 to ${last(m.de).toFixed(2)}x in FY2025.` },
+    { keywords: ['dividend', 'dividends', 'payout', 'yield', 'dps', 'shareholder', 'shareholders'], text: `The dividend was raised every year, from $${m.dps[0].toFixed(2)} to $${last(m.dps).toFixed(2)} per share (${f1(last(m.payout))}% payout in FY2025).` },
+    { keywords: ['moat', 'competitive', 'advantage', 'competition', 'competitors', 'edge'], interp: true, text: q('competitive-advantage') },
+    { keywords: ['model', 'business', 'customers', 'sells'], interp: true, text: q('business-model') },
+    { keywords: ['quality'], interp: true, text: q('business-quality') },
   ];
 }
 
