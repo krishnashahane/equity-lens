@@ -1523,6 +1523,44 @@ html[data-theme="dark"] #topbar select{color:#c7cad0;}
   #marketing-root .nav-cta{padding:9px 14px;}
 }
 #content .flex.between.items-center{flex-wrap:wrap;gap:12px;}
+/* Business analysis */
+.badge-watch{color:var(--amber);background:var(--amber-soft);}
+/* tabular figures only where numbers line up; prose keeps normal hyphens */
+body, #shell, #modal-root, #cmdk-overlay{font-variant-numeric:normal;}
+.fin-table td, .fin-table th, .heatmap-table, .metric-value, .ch-price, .bridge-step .v, .numbox, .ba-score, .ba-trend,
+.try-result-val, .stat-num, .fv-block .val, .upside-pill, .peer-table td, .pc-tip b{font-variant-numeric:tabular-nums;}
+/* price chart hover */
+.pc-line{display:none;position:absolute;width:1px;background:var(--border-strong);pointer-events:none;transform:translateX(-.5px);}
+.pc-dot{display:none;position:absolute;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:#4c82f7;border:2px solid var(--panel);pointer-events:none;}
+.pc-tip{display:none;position:absolute;width:140px;flex-direction:column;gap:1px;padding:7px 10px;background:var(--panel);border:1px solid var(--border-strong);border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,.12);font-size:11px;color:var(--text-muted);pointer-events:none;z-index:3;}
+.pc-tip b{font-size:13px;color:var(--text);}
+#price-chart-wrap{cursor:crosshair;touch-action:pan-y;}
+[role="button"][data-action]:focus-visible,.faq-q:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+.ba-of{font-size:14px;color:var(--text-faint);font-weight:600;}
+.ba-score{font-size:13px;color:var(--text-muted);margin-right:2px;}
+.ba-score b{font-size:18px;color:var(--text);}
+.ba-meter{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:14px;}
+.ba-meter i{height:8px;border-radius:2px;background:var(--border);}
+.ba-meter i.pass{background:var(--teal);} .ba-meter i.watch{background:var(--amber);} .ba-meter i.fail{background:var(--red);}
+.ba-qual{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
+.ba-q{padding:16px 18px;border-top:1px solid var(--border);}
+.ba-q:nth-child(-n+2){border-top:0;}
+.ba-q:nth-child(odd){border-right:1px solid var(--border);}
+.ba-q-head{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.ba-q-title{font-weight:700;font-size:13px;flex:1;color:var(--text);}
+.ba-q p{margin:0;color:var(--text-muted);font-size:12.5px;line-height:1.6;}
+.ba-num{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--panel-alt);border:1px solid var(--border);color:var(--text-muted);font-size:10.5px;font-weight:700;margin-right:8px;}
+.ba-q-head .ba-num{margin-right:0;}
+.ba-table .ba-group td{background:var(--panel-alt);font-weight:700;color:var(--text);text-align:left;border-top:1px solid var(--border-strong);}
+.ba-table .ba-group td:last-child{text-align:right;}
+.ba-note{font-weight:500;color:var(--text-faint);font-size:11.5px;margin-left:10px;}
+.ba-table td.ba-trend{color:var(--text-muted);}
+.ba-criteria{font-size:11px;line-height:1.6;border-top:1px solid var(--border);}
+@media(max-width:900px){
+  .ba-qual{grid-template-columns:1fr;}
+  .ba-q:nth-child(odd){border-right:0;}
+  .ba-q:nth-child(2){border-top:1px solid var(--border);}
+}
 @media print{
   body > *:not(#modal-root){display:none !important;}
   #modal-root .modal-overlay{position:static;background:none;padding:0;display:block;}
@@ -1533,7 +1571,7 @@ html[data-theme="dark"] .scenario-tab.active{background:#2f62e0;border-color:#2f
 </style>
 </head>
 <body>
-<div id="toast"></div>
+<div id="toast" role="status" aria-live="polite"></div>
 <div id="cmdk-overlay" class="hidden">
   <div id="cmdk-box">
     <div id="cmdk-input-row">
@@ -2109,6 +2147,8 @@ const COMPANY = {
   interest:[-30,-28,-25,-22,-20],
   netIncome:[487.9,559.4,631.6,725.8,810.9],
   eps:[5.30,6.08,6.87,7.89,8.82],
+  da:[150,158,165,172,180], // depreciation & amortization, $M
+  dps:[1.20,1.35,1.50,1.70,1.90], // dividends per share, $
   bs:{
     cash:[520,610,700,800,900], stInvest:[50,60,70,80,90], receivables:[380,410,440,470,500],
     inventory:[410,440,470,500,530], otherCA:[100,100,100,100,100],
@@ -2240,6 +2280,7 @@ const ICON_SVG = {
   briefcase:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
   home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',
   signout:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>',
+  check:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
   globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
 };
 function getCommands(){
@@ -2247,6 +2288,7 @@ function getCommands(){
     {label:'Go to Overview', hint:'Workspace', icon:'overview', run:()=>{ state.screen='company'; state.companyTab='overview'; render(); }},
     {label:'Go to Valuation lab', hint:'Workspace', icon:'target', run:()=>{ state.screen='company'; state.companyTab='valuation'; render(); }},
     {label:'Go to AI research', hint:'Workspace', icon:'spark', run:()=>{ state.screen='company'; state.companyTab='documents'; render(); }},
+    {label:'Go to Business analysis', hint:'Workspace', icon:'check', run:()=>{ state.screen='company'; state.companyTab='analysis'; render(); }},
     {label:'Go to Financials', hint:'Workspace', icon:'overview', run:()=>{ state.screen='company'; state.companyTab='financials'; render(); }},
     {label:'Go to Peers', hint:'Workspace', icon:'overview', run:()=>{ state.screen='company'; state.companyTab='peers'; render(); }},
     {label:'Go to Watchlist', hint:'Workspace', icon:'star', run:()=>{ state.screen='watchlist'; render(); }},
@@ -2511,6 +2553,7 @@ function setPricePeriod(period){
 const NAV_ITEMS = [
   {id:'overview', label:'Overview', icon:'grid', screen:'company', tab:'overview', section:'WORKSPACE'},
   {id:'valuation', label:'Valuation lab', icon:'target', screen:'company', tab:'valuation', section:'WORKSPACE'},
+  {id:'analysis', label:'Business analysis', icon:'check', screen:'company', tab:'analysis', section:'WORKSPACE'},
   {id:'ai', label:'AI research', icon:'spark', screen:'company', tab:'documents', section:'WORKSPACE'},
   {id:'watchlist', label:'Watchlist', icon:'star', screen:'watchlist', section:'WORKSPACE', badge:true},
   {id:'saved', label:'Saved reports', icon:'folder', screen:'savedreports', section:'LIBRARY'},
@@ -2524,6 +2567,7 @@ const ICONS = {
   spark:'<path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8z"/>',
   folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
   briefcase:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  check:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
 };
 function renderSidebar(){
   const nav = document.getElementById('side-nav');
@@ -2576,7 +2620,7 @@ function renderCompanyHeader(){
     </div>
   </div>
   <div class="tabbar" id="company-tabbar">
-    ${['overview','financials','valuation','peers','documents'].map(t=>`
+    ${['overview','analysis','financials','valuation','peers','documents'].map(t=>`
       <button class="tabbtn ${state.companyTab===t?'active':''}" data-action="company-tab" data-arg="${t}">${t[0].toUpperCase()+t.slice(1)}</button>
     `).join('')}
   </div>`;
@@ -2622,6 +2666,40 @@ function priceChartSVG(range){
     <path d="${path}" fill="none" stroke="#4c82f7" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
   </svg>`;
 }
+const DATA_AS_OF = Date.UTC(2026, 8, 12); // Sep 12, 2026
+function tradingDayBack(n){
+  const d = new Date(DATA_AS_OF);
+  while(n > 0){ d.setUTCDate(d.getUTCDate()-1); const wd = d.getUTCDay(); if(wd !== 0 && wd !== 6) n--; }
+  return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric', timeZone:'UTC'});
+}
+function wirePriceChart(){
+  const wrap = document.getElementById('price-chart-wrap');
+  if(!wrap || wrap.dataset.wired) return;
+  wrap.dataset.wired = '1';
+  wrap.style.position = 'relative';
+  wrap.insertAdjacentHTML('beforeend', '<div class="pc-line"></div><div class="pc-dot"></div><div class="pc-tip"></div>');
+  const line = wrap.querySelector('.pc-line'), dot = wrap.querySelector('.pc-dot'), tip = wrap.querySelector('.pc-tip');
+  const hide = ()=>{ line.style.display = dot.style.display = tip.style.display = 'none'; };
+  wrap.addEventListener('pointerleave', hide);
+  wrap.addEventListener('pointermove', (e)=>{
+    const svg = wrap.querySelector('svg');
+    if(!svg) return;
+    const r = svg.getBoundingClientRect(), w = wrap.getBoundingClientRect();
+    const data = PRICE_SERIES_FULL.slice(-RANGE_DAYS[state.priceRange]);
+    const ratio = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    const i = Math.round(ratio * (data.length - 1));
+    const min = Math.min(...data), max = Math.max(...data), range = (max-min)||1;
+    const H = 220, padY = 14;
+    const x = r.left - w.left + (i/(data.length-1)) * r.width;
+    const y = r.top - w.top + (H - padY - ((data[i]-min)/range)*(H - padY*2)) * (r.height / H);
+    const chg = (data[i]/data[0]-1)*100;
+    line.style.cssText = `display:block;left:${x}px;top:${r.top-w.top}px;height:${r.height}px;`;
+    dot.style.cssText = `display:block;left:${x}px;top:${y}px;`;
+    tip.innerHTML = `<b>${money(data[i])}</b><span>${tradingDayBack(data.length-1-i)}</span><span class="${chg>=0?'txt-pos':'txt-neg'}">${pct(chg)} over ${state.priceRange}</span>`;
+    const left = Math.min(Math.max(x - 70, 4), w.width - 144);
+    tip.style.cssText = `display:flex;left:${left}px;top:${Math.max(4, y - 74)}px;`;
+  });
+}
 function barLineChart(labels, values, opts={}){
   const w=520,h=150,pad=26;
   const max=Math.max(...values)*1.15, min=0;
@@ -2643,16 +2721,16 @@ function fvBar(bear,base,bull,market){
   const range=max-min;
   const pos=v=>((v-min)/range)*100;
   return `
-  <div style="position:relative;height:54px;margin:18px 4px 6px;">
+  <div style="position:relative;height:54px;margin:30px 4px 6px;">
     <div style="position:absolute;left:0;right:0;top:24px;height:4px;background:linear-gradient(90deg,var(--red),var(--amber),var(--teal));border-radius:2px;opacity:.5;"></div>
     ${[['Bear',bear,'red'],['Base',base,'blue'],['Bull',bull,'teal']].map(([lbl,v,c])=>`
       <div style="position:absolute;left:${pos(v)}%;top:16px;transform:translateX(-50%);text-align:center;">
         <div style="width:10px;height:10px;border-radius:50%;background:var(--${c});border:2px solid var(--panel);margin:0 auto;"></div>
         <div style="font-size:10px;color:var(--text-faint);margin-top:4px;white-space:nowrap;">${lbl} ${money(v,0)}</div>
       </div>`).join('')}
-    <div style="position:absolute;left:${pos(market)}%;top:-2px;transform:translateX(-50%);text-align:center;">
-      <div style="width:2px;height:26px;background:var(--text);margin:0 auto;"></div>
-      <div style="font-size:10px;color:var(--text);font-weight:700;margin-top:2px;">Market ${money(market,0)}</div>
+    <div style="position:absolute;left:${pos(market)}%;top:-18px;transform:translateX(-50%);text-align:center;">
+      <div style="font-size:10px;color:var(--text);font-weight:700;margin-bottom:2px;white-space:nowrap;">Market ${money(market,0)}</div>
+      <div style="width:2px;height:32px;background:var(--text);margin:0 auto;"></div>
     </div>
   </div>`;
 }
@@ -2746,6 +2824,7 @@ function renderOverview(){
       </div>
       <div class="panel-pad" id="price-chart-wrap">${priceChartSVG(state.priceRange)}</div>
     </div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0;">
     <div class="panel">
       <div class="panel-head"><div class="panel-title">Valuation summary</div><div class="panel-sub">DCF · Base case</div></div>
       <div class="panel-pad">
@@ -2759,6 +2838,8 @@ function renderOverview(){
         ${fvBar(dcfBear.perShare, dcfBase.perShare, dcfBull.perShare, COMPANY.price)}
         <button class="btn btn-primary btn-sm w100" style="justify-content:center;margin-top:10px;" data-action="nav" data-arg="valuation">Open valuation workspace →</button>
       </div>
+    </div>
+    ${analysisCard()}
     </div>
     ${researchPulsePanel(upside)}
   </div>
@@ -2818,7 +2899,7 @@ function keyRatiosTable(){
   const curRatio = ((COMPANY.bs.cash[i]+COMPANY.bs.stInvest[i]+COMPANY.bs.receivables[i]+COMPANY.bs.inventory[i]+COMPANY.bs.otherCA[i])/COMPANY.totalCL[i]);
   const de = ((COMPANY.bs.debtST[i]+COMPANY.bs.debtLT[i])/COMPANY.totalEquity[i]);
   const pe = COMPANY.price/COMPANY.eps[i];
-  const ebitda = COMPANY.opIncome[i]+180;
+  const ebitda = COMPANY.opIncome[i]+COMPANY.da[i];
   const ev = COMPANY.price*COMPANY.shares + (COMPANY.bs.debtST[i]+COMPANY.bs.debtLT[i]) - (COMPANY.bs.cash[i]+COMPANY.bs.stInvest[i]);
   const evEbitda = ev/ebitda;
   const rows = [
@@ -2846,6 +2927,159 @@ function peerTable(compact=false){
       </tr>`).join('')}
     </tbody>
   </table>`;
+}
+
+/* ============================================================
+   BUSINESS ANALYSIS CHECKLIST (12 points)
+   Same rules as the API (api/_lib/analysis.js).
+============================================================ */
+const QUALITATIVE = [
+  {n:1, key:'business-quality', label:'Business quality', verdict:'pass',
+    text:'Industrial components maker with five straight years of revenue and earnings growth, expanding margins and net cash on the balance sheet. Demand is cyclical and tied to customer capital spending.'},
+  {n:2, key:'product-relevance', label:'Product/service relevance', verdict:'pass', cite:'h1',
+    text:'Automation components sit in a growing spend category: automation volumes grew 11% in FY2025, faster than the legacy components segment.'},
+  {n:3, key:'competitive-advantage', label:'Competitive advantage', verdict:'watch', cite:'h2',
+    text:'Multi-year supply agreements supported a ~3% price increase and the 19.0% operating margin beats most peers, but Meridian Fabrication earns more (21.0%) and the edge is contractual rather than structural.'},
+  {n:4, key:'business-model', label:'Business model', verdict:'pass', cite:'h3',
+    text:'Sells engineered components to heavy-industrial customers under multi-year contracts. Capex is about 5% of revenue and FY2025 free cash flow covered 64% of net profit. Specialty-alloy input costs are the main margin risk.'},
+];
+const VERDICT_LABEL = {pass:'Pass', watch:'Watch', fail:'Fail'};
+function verdictBadge(v){ return `<span class="badge badge-${v==='pass'?'pos':v==='fail'?'neg':'watch'}">${VERDICT_LABEL[v]}</span>`; }
+function analysisMetrics(){
+  const C = COMPANY, idx = C.years.map((y,i)=>i);
+  const ebitda = idx.map(i=>C.opIncome[i]+C.da[i]);
+  return {
+    revenue:C.revenue, netIncome:C.netIncome, ebitda,
+    ebitdaMargin: idx.map(i=>ebitda[i]/C.revenue[i]*100),
+    de: idx.map(i=>(C.bs.debtST[i]+C.bs.debtLT[i])/C.totalEquity[i]),
+    grossMargin: idx.map(i=>C.grossProfit[i]/C.revenue[i]*100),
+    opMargin: idx.map(i=>C.opIncome[i]/C.revenue[i]*100),
+    netMargin: idx.map(i=>C.netIncome[i]/C.revenue[i]*100),
+    roe: idx.map(i=>C.netIncome[i]/C.totalEquity[i]*100),
+    roce: idx.map(i=>C.opIncome[i]/(C.totalAssets[i]-C.totalCL[i])*100),
+    dps: C.dps,
+    payout: idx.map(i=>C.dps[i]/C.eps[i]*100),
+  };
+}
+function computeAnalysis(){
+  const m = analysisMetrics(), C = COMPANY;
+  const last = a=>a[a.length-1], f1 = v=>v.toFixed(1), f2 = v=>v.toFixed(2);
+  const cagr = a=>(Math.pow(last(a)/a[0], 1/(a.length-1))-1)*100;
+  const rising = a=>a.every((v,i)=>i===0||v>a[i-1]);
+  const tier = (v,good,ok,higher=true)=> higher ? (v>=good?'pass':v>=ok?'watch':'fail') : (v<good?'pass':v<ok?'watch':'fail');
+  const om0 = m.opMargin[0], om = last(m.opMargin);
+  const both = rising(m.revenue) && rising(m.netIncome);
+  const fin = [
+    {n:5, key:'revenue-profit', label:'Revenue and profit (5 years)', verdict: both?'pass':(last(m.netIncome)>m.netIncome[0]?'watch':'fail'),
+      note:`Revenue CAGR ${f1(cagr(m.revenue))}%, net profit CAGR ${f1(cagr(m.netIncome))}%${both?'; both grew every year':''}`,
+      rows:[['Revenue','revenue','m'],['Net profit','netIncome','m']]},
+    {n:6, key:'ebitda', label:'EBITDA', verdict:tier(last(m.ebitdaMargin),15,10),
+      note:`EBITDA margin ${f1(last(m.ebitdaMargin))}% in FY2025 (pass ≥ 15%)`,
+      rows:[['EBITDA','ebitda','m'],['EBITDA margin','ebitdaMargin','%']]},
+    {n:7, key:'debt-to-equity', label:'Debt-to-equity ratio', verdict:tier(last(m.de),0.5,1.0,false),
+      note:`${f2(last(m.de))}x in FY2025 (pass < 0.5x)`, rows:[['Debt / equity','de','x']]},
+    {n:8, key:'profitability', label:'Profitability', verdict:tier(om,15,10),
+      note:`Operating margin ${f1(om)}%, ${om>=om0?'up':'down'} from ${f1(om0)}% (pass ≥ 15%)`,
+      rows:[['Gross margin','grossMargin','%'],['Operating margin','opMargin','%']]},
+    {n:9, key:'roe', label:'ROE (return on equity)', verdict:tier(last(m.roe),15,10),
+      note:`${f1(last(m.roe))}% in FY2025 (pass ≥ 15%)`, rows:[['ROE','roe','%']]},
+    {n:10, key:'roce', label:'ROCE (return on capital employed)', verdict:tier(last(m.roce),15,10),
+      note:`${f1(last(m.roce))}% in FY2025 (pass ≥ 15%)`, rows:[['ROCE','roce','%']]},
+    {n:11, key:'net-margin', label:'Net profit margin', verdict:tier(last(m.netMargin),10,5),
+      note:`${f1(last(m.netMargin))}% in FY2025 (pass ≥ 10%)`, rows:[['Net profit margin','netMargin','%']]},
+    {n:12, key:'dividends', label:'Dividend history', verdict: rising(m.dps)?'pass':(last(m.dps)>=m.dps[0]?'watch':'fail'),
+      note:`${rising(m.dps)?'Raised every year':'Not raised every year'}; ${f1(last(m.dps)/C.price*100)}% yield, ${f1(last(m.payout))}% payout`,
+      rows:[['Dividend per share','dps','$'],['Payout ratio','payout','%']]},
+  ];
+  const all = [...QUALITATIVE, ...fin];
+  const count = v=>all.filter(x=>x.verdict===v).length;
+  return {m, qual:QUALITATIVE, fin, all, score:{pass:count('pass'), watch:count('watch'), fail:count('fail'), total:all.length}};
+}
+function fmtMetric(v, unit){
+  if(unit==='m') return moneyM(v);
+  if(unit==='$') return money(v,2);
+  if(unit==='x') return v.toFixed(2)+'x';
+  return v.toFixed(1)+'%';
+}
+function trendMetric(a, unit){
+  const first = a[0], lastV = a[a.length-1];
+  if(unit==='m' || unit==='$'){ const c = (Math.pow(lastV/first, 1/(a.length-1))-1)*100; return (c>=0?'+':'')+c.toFixed(1)+'% CAGR'; }
+  if(unit==='x'){ const d = lastV-first; return Math.abs(d) < 0.005 ? 'unchanged' : (d>0?'+':'−')+Math.abs(d).toFixed(2)+'x'; }
+  const d = lastV-first; return Math.abs(d) < 0.05 ? 'unchanged' : (d>0?'+':'−')+Math.abs(d).toFixed(1)+' pts';
+}
+function analysisCard(){
+  const A = computeAnalysis(), sc = A.score;
+  return `<div class="panel">
+    <div class="panel-head"><div class="panel-title">Business checklist</div><div class="panel-sub">12-point review</div></div>
+    <div class="panel-pad">
+      <div class="flex between items-center">
+        <div class="metric-value" style="font-size:24px;">${sc.pass}<span class="ba-of"> / ${sc.total} pass</span></div>
+        <div class="flex gap6">${sc.watch?`<span class="badge badge-watch">${sc.watch} Watch</span>`:''}${sc.fail?`<span class="badge badge-neg">${sc.fail} Fail</span>`:''}</div>
+      </div>
+      <div class="ba-meter" aria-hidden="true">${A.all.map(x=>`<i class="${x.verdict}" title="${x.n}. ${esc(x.label)}: ${VERDICT_LABEL[x.verdict]}"></i>`).join('')}</div>
+      <button class="btn btn-ghost btn-sm w100" style="justify-content:center;margin-top:14px;" data-action="company-tab" data-arg="analysis">Open business analysis →</button>
+    </div>
+  </div>`;
+}
+function renderAnalysis(){
+  const A = computeAnalysis(), sc = A.score, yrs = COMPANY.years;
+  const cols = yrs.length + 3;
+  const finRows = A.fin.map(item=>`
+    <tr class="ba-group" id="ba-${item.key}">
+      <td colspan="${cols-1}"><span class="ba-num">${item.n}</span>${esc(item.label)}<span class="ba-note">${esc(item.note)}</span></td>
+      <td>${verdictBadge(item.verdict)}</td>
+    </tr>
+    ${item.rows.map(([label,key,unit])=>`<tr class="row-sub">
+      <td class="row-label">${label}</td>
+      ${A.m[key].map(v=>`<td>${fmtMetric(v,unit)}</td>`).join('')}
+      <td class="ba-trend">${trendMetric(A.m[key],unit)}</td><td></td>
+    </tr>`).join('')}`).join('');
+  return `
+  <div class="flex between items-center" style="margin-bottom:14px;">
+    <div>
+      <div class="section-title" style="margin-bottom:2px;">Business analysis checklist</div>
+      <div class="txt-faint" style="font-size:11.5px;">12-point review · FY2021–FY2025 · Data as of Sep 12, 2026 (demo)</div>
+    </div>
+    <div class="flex gap10 items-center">
+      <span class="ba-score"><b>${sc.pass}</b> / ${sc.total} pass</span>
+      <span class="badge badge-pos">${sc.pass} Pass</span><span class="badge badge-watch">${sc.watch} Watch</span><span class="badge badge-neg">${sc.fail} Fail</span>
+      <button class="btn btn-ghost" data-action="export-analysis"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg> Export CSV</button>
+    </div>
+  </div>
+  <div class="panel" style="margin-bottom:16px;">
+    <div class="panel-head"><div><div class="panel-title">Business</div><div class="panel-sub">Qualitative assessment · analyst view, verify against the filings</div></div></div>
+    <div class="ba-qual">
+      ${A.qual.map(q=>`<div class="ba-q" id="ba-${q.key}">
+        <div class="ba-q-head"><span class="ba-num">${q.n}</span><span class="ba-q-title">${esc(q.label)}</span>${verdictBadge(q.verdict)}</div>
+        <p>${esc(q.text)}${q.cite?` <span class="cite" data-action="cite" data-arg="ar2025|${q.cite}" title="Open the source passage">${q.cite.slice(1)}</span>`:''}</p>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><div><div class="panel-title">Financial evaluation</div><div class="panel-sub">Fiscal years · ${state.currency==='USD'?'$':FX[state.currency].sym} millions unless noted</div></div></div>
+    <div class="table-scroll"><table class="fin-table ba-table">
+      <thead><tr><th>Checklist item</th>${yrs.map(y=>`<th>FY${y}</th>`).join('')}<th>5-yr change</th><th>Verdict</th></tr></thead>
+      <tbody>${finRows}</tbody>
+    </table></div>
+    <div class="panel-pad txt-faint ba-criteria">Pass criteria: revenue and net profit up every year · EBITDA margin ≥ 15% · debt-to-equity &lt; 0.5x · operating margin ≥ 15% · ROE ≥ 15% · ROCE ≥ 15% · net profit margin ≥ 10% · dividend raised every year. “Watch” is one band below a pass. ROE uses year-end equity; ROCE = EBIT ÷ (total assets − current liabilities).</div>
+  </div>`;
+}
+function exportAnalysisCSV(){
+  const A = computeAnalysis(), yrs = COMPANY.years;
+  const r = v=>Math.round(v*100)/100;
+  const lines = [['EquityLens business analysis checklist'], ['Company','Solvane Industrial (SOLV)'], ['Data as of','Sep 12, 2026 (demo data)'],
+    ['Score', A.score.pass+' / '+A.score.total+' pass', A.score.watch+' watch', A.score.fail+' fail'], [],
+    ['#','Item','Verdict','Assessment'], ...A.qual.map(q=>[q.n, q.label, VERDICT_LABEL[q.verdict], q.text]), [],
+    ['#','Item','Verdict','Note'], ...A.fin.map(f=>[f.n, f.label, VERDICT_LABEL[f.verdict], f.note]), [],
+    ['Metric (USD)', ...yrs.map(y=>'FY'+y)],
+    ...A.fin.flatMap(f=>f.rows.map(([label,key,unit])=>[label+(unit==='m'?' ($M)':unit==='$'?' ($)':unit==='x'?' (x)':' (%)'), ...A.m[key].map(r)]))];
+  const csv = lines.map(row=>row.map(csvCell).join(',')).join('\r\n');
+  const url = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+  const link = document.createElement('a');
+  link.href = url; link.download = 'SOLV-business-analysis.csv';
+  document.body.appendChild(link); link.click(); link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 1500);
+  toast('Business analysis downloaded as CSV');
 }
 
 /* ============================================================
@@ -3137,7 +3371,7 @@ function renderAIResearch(){
     <div class="chat-col">
       <div class="chat-head"><div class="panel-title">AI Research</div><div class="panel-sub">Answers are generated from uploaded source documents</div></div>
       <div class="suggested">
-        ${["What drove revenue growth?","What are the main valuation risks?","What is management's compensation structure?"].map(q=>`<div class="chip" data-action="ask" data-arg="${encodeURIComponent(q)}">${q}</div>`).join('')}
+        ${["What drove revenue growth?","What are ROE and ROCE?","Is the dividend growing?","What is management's compensation structure?"].map(q=>`<div class="chip" data-action="ask" data-arg="${encodeURIComponent(q)}">${q}</div>`).join('')}
       </div>
       <div class="chat-scroll" id="chat-scroll">
         ${state.chat.map(m=>chatBubble(m)).join('')}
@@ -3586,6 +3820,7 @@ function renderView(){
   if(state.screen==='company'){
     html += renderCompanyHeader();
     if(state.companyTab==='overview') html += renderOverview();
+    else if(state.companyTab==='analysis') html += renderAnalysis();
     else if(state.companyTab==='financials') html += renderFinancials();
     else if(state.companyTab==='valuation') html += renderValuation();
     else if(state.companyTab==='peers') html += `<div class="panel"><div class="panel-head"><div class="panel-title">Peer comparison</div><div class="panel-sub">Industrial Equipment & Machinery</div></div><div class="table-scroll">${peerTable(false)}</div></div>`;
@@ -3624,10 +3859,11 @@ document.addEventListener('click', (e)=>{
     if(!em || !EMAIL_RE.test(em.value.trim())){ toast('Enter a valid work email'); if(em) em.focus(); return; }
     if(demoBtn.disabled) return;
     demoBtn.disabled = true;
+    const demoLabel = demoBtn.innerHTML; demoBtn.textContent = 'Sending…';
     postJSON('/api/demo', {email:em.value.trim(), website:(document.getElementById('demo-website')||{}).value||''})
       .then(()=>{ em.value=''; toast('Thanks — we’ll be in touch to schedule your demo.'); })
       .catch(err=>toast(err.message || 'Could not send. Please try again.'))
-      .finally(()=>{ demoBtn.disabled = false; });
+      .finally(()=>{ demoBtn.disabled = false; demoBtn.innerHTML = demoLabel; });
     return;
   }
   const sendBtn = e.target.closest('#send-msg-btn');
@@ -3640,11 +3876,12 @@ document.addEventListener('click', (e)=>{
     if(fields[3].value.trim().length < 10){ toast('Message should be at least 10 characters'); fields[3].focus(); return; }
     if(sendBtn.disabled) return;
     sendBtn.disabled = true;
+    const sendLabel = sendBtn.innerHTML; sendBtn.textContent = 'Sending…';
     postJSON('/api/contact', {name:fields[0].value.trim(), email:fields[1].value.trim(), subject:fields[2].value.trim(),
         message:fields[3].value.trim(), website:(document.getElementById('contact-website')||{}).value||''})
       .then(()=>{ fields.forEach(f=>{ f.value=''; }); toast('Message sent — we’ll reply by email.'); })
       .catch(err=>toast(err.message || 'Could not send. Please try again.'))
-      .finally(()=>{ sendBtn.disabled = false; });
+      .finally(()=>{ sendBtn.disabled = false; sendBtn.innerHTML = sendLabel; });
     return;
   }
   const burger = e.target.closest('.nav-burger');
@@ -3697,6 +3934,7 @@ document.addEventListener('click', (e)=>{
     case 'save-scenario': state.savedAssumptions = {...state.assumptions}; toast('Scenario saved'); render(); break;
     case 'compare-scenarios': state.openCompare = true; render(); break;
     case 'export-valuation': exportValuationCSV(); break;
+    case 'export-analysis': exportAnalysisCSV(); break;
     case 'fin-stmt': state.finStatement = arg; render(); break;
     case 'fin-period': state.finPeriod = arg; render(); break;
     case 'fin-view': state.finView = arg; render(); break;
@@ -3839,29 +4077,59 @@ document.addEventListener('keydown',(e)=>{
 const HASH_TO_SCREEN = {'':'mkt-home', home:'mkt-home', platform:'mkt-platform', pricing:'mkt-pricing', contact:'mkt-contact', signin:'signin', signup:'signup', app:'company'};
 const APP_SCREENS = ['company','watchlist','savedreports','portfolio'];
 function currentHash(){ return decodeURIComponent(location.hash.replace(/^#\/?/, '')); }
+const APP_TABS = ['overview','analysis','financials','valuation','peers','documents'];
+const APP_PAGES = {watchlist:'watchlist', reports:'savedreports', portfolio:'portfolio'};
 function hashForScreen(sc){
   if(sc === 'mkt-home') return '';
   if(sc.indexOf('mkt-') === 0) return sc.slice(4);
   if(sc === 'signin' || sc === 'signup') return sc;
-  return 'app';
+  if(sc === 'company') return 'app/' + state.companyTab;
+  const page = Object.keys(APP_PAGES).find(k=>APP_PAGES[k]===sc);
+  return 'app/' + (page || 'overview');
 }
+// Returns {screen, tab?} for a hash, or null if it isn't one of ours.
+function routeFromHash(h){
+  if(h === 'app') return {screen:'company', tab:'overview'};
+  const m = h.match(/^app\/([a-z]+)$/);
+  if(m){
+    if(APP_TABS.indexOf(m[1]) > -1) return {screen:'company', tab:m[1]};
+    if(APP_PAGES[m[1]]) return {screen:APP_PAGES[m[1]]};
+    return {screen:'company', tab:'overview'};
+  }
+  const sc = HASH_TO_SCREEN[h];
+  return sc && sc !== 'company' ? {screen:sc} : (sc === 'company' ? {screen:'company', tab:'overview'} : null);
+}
+// Elements that act like buttons but aren't <button>/<a> become focusable and
+// respond to Enter/Space.
+function enhanceClickables(root){
+  (root || document).querySelectorAll('[data-action]:not(a):not(button):not(input):not(select):not(textarea):not(.modal-overlay), .faq-q').forEach(el=>{
+    if(!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    if(!el.hasAttribute('role')) el.setAttribute('role', 'button');
+  });
+}
+document.addEventListener('keydown', (e)=>{
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  const t = e.target;
+  if(!(t instanceof Element) || t.getAttribute('role') !== 'button' || /^(BUTTON|A|INPUT|SELECT|TEXTAREA)$/.test(t.tagName)) return;
+  e.preventDefault();
+  t.click();
+});
 function render(){
   renderView();
+  enhanceClickables();
+  wirePriceChart();
   const h = hashForScreen(state.screen);
   if(h !== currentHash()){
     try{ history.pushState(null, '', h ? '#'+h : location.pathname + location.search); }catch(err){}
   }
 }
 window.addEventListener('popstate', ()=>{
-  const sc = HASH_TO_SCREEN[currentHash()];
-  if(sc === undefined) return;
-  if(sc === 'company'){
-    if(APP_SCREENS.indexOf(state.screen) === -1){ state.screen = 'company'; state.companyTab = 'overview'; }
-  } else {
-    state.screen = sc;
-  }
+  const r = routeFromHash(currentHash());
+  if(!r) return;
+  state.screen = r.screen;
+  if(r.tab) state.companyTab = r.tab;
   state.openReport = null; state.openCompare = false;
-  renderView();
+  renderView(); enhanceClickables(); wirePriceChart();
 });
 
 /* ============================================================
@@ -3882,7 +4150,10 @@ function toggleTheme(){
   applyThemeButton();
 }
 document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape' && (state.openReport || state.openCompare)){ state.openReport = null; state.openCompare = false; render(); }
+  if(e.key !== 'Escape') return;
+  if(state.openReport || state.openCompare){ state.openReport = null; state.openCompare = false; render(); return; }
+  ['profile-menu','notif-menu','search-results'].forEach(id=>{ const m = document.getElementById(id); if(m) m.classList.remove('show'); });
+  const nl = document.getElementById('nav-links'); if(nl) nl.classList.remove('open');
 });
 
 /* boot */
@@ -3890,8 +4161,8 @@ if(new URLSearchParams(window.location.search).get('demo') === '1'){
   state.screen = 'company'; state.companyTab = 'overview';
 }
 {
-  const initial = HASH_TO_SCREEN[currentHash()];
-  if(initial) state.screen = initial;
+  const initial = routeFromHash(currentHash());
+  if(initial){ state.screen = initial.screen; if(initial.tab) state.companyTab = initial.tab; }
 }
 applyThemeButton();
 render();
